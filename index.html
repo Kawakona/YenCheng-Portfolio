@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Design Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0 !important;
+      color: #ffffff;
+      overflow-x: hidden;
+      /*background-color: #ffffff;*/
+      background-image: url('public/image/Blurback.png');
+      background-attachment: fixed;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ccc;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    /* 漢堡按鈕樣式 */
+    .nav-toggle-label {
+      display: none;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* 隱藏 checkbox */
+    #nav-toggle {
+      display: none;
+    }
+
+    /* 手機模式 */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        right: 20px; /* 靠右對齊 */
+        top: 60px;   /* 展開在下方 */
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px 50px;
+        border-radius: 8px;
+        align-items: flex-start; /* 讓選單內容靠右 */
+        text-align: right;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+
+      .nav-toggle-label {
+        display: block;
+      }
+
+      /* 勾選 checkbox 時展開選單 */
+      #nav-toggle:checked ~ .nav-links {
+        display: flex;
+      }
+    }
+
+    @media (hover: none) {
+      .project-card.active .project-content h3,
+      .project-card.active .project-content small,
+      .project-card.active .project-content p,
+      .project-card.active .project-content .btn {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*background*/
+    
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('public/image/BlurFront.png');
+      background-size: 100% auto;
+      background-position: top;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .hero-bg {
+      transform: scaleX(1);
+    } 
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      color: #ffffff;
+      font-size: 4rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: #ffffffdd;
+      font-size: 1rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: rgba(126, 126, 126, 0.2);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(222, 222, 222, 0.4);
+    }
+
+    .btn:hover {
+      background-color: rgba(203, 203, 203, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Projects Section */
+    .projects {
+      min-height: 100vh;
+      position: relative;
+      padding: 100px 0;
+      display: block;
+      overflow: hidden;
+    }
+
+    .projects-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('public/image/BlurFrontR.png');
+      background-size: 100% auto;
+      background-position: top;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .projects-bg {
+      transform: scaleX(1);
+    } 
+
+    .projects::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      text-align: left;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 350px;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.1);
+    }
+
+    .project-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+    }
+
+    .project-card:hover .project-content {
+      transform: translateY(0);
+    }
+
+    .project-content h3 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.1s;
+    }
+
+    .project-content small {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      font-weight: normal;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.1s;
+    }
+
+    .project-content p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.2s;
+      text-align: justify;
+    }
+
+    .project-content .btn {
+      align-self: flex-start;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.3s;
+    }
+
+    .project-card:hover .project-content h3,
+    .project-card.active .project-content h3,
+    .project-card:hover .project-content small,
+    .project-card.active .project-content small,
+    .project-card:hover .project-content p,
+    .project-card.active .project-content p,
+    .project-card:hover .project-content .btn,
+    .project-card.active .project-content .btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Project Detail Page */
+    .project-detail {
+      min-height: 100vh;
+      padding: 120px 0 80px;
+      position: relative;
+      display: block;
+      overflow: hidden;
+    }
+
+    .project-detail-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('public/image/BlurFrontY.png');
+      background-size: 100% auto;
+      background-position: top;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .project-detail-bg{
+      transform: scaleX(1);
+    } 
+
+    .project-detail::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0);
+      z-index: 1;
+      pointer-events: none;
+      z-index: 0;     
+    }
+
+    .project-detail-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .project-detail-header {
+      margin-bottom: 40px;
+    }
+
+    .project-detail-header h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .project-detail-header p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 700px;
+      text-align: justify;
+    }
+
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0px;
+      margin-bottom: 40px;
+    }
+
+    .gallery-img {
+      flex: 1 1 calc(50% - 10px); /* 每行2張圖，含gap留白，根據需要調整 */
+      aspect-ratio: 16 / 9;       /* 或 4 / 3 或 1 / 1，看你想要什麼比例 */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .project-description {
+      margin-bottom: 40px;
+    }
+
+    .project-description h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .project-description p {
+      line-height: 1.7;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .project-description-bar {
+      background-color: rgba(111, 111, 111, 0.7);
+      padding: 0px 16px;
+      border-radius: 30px;
+      
+    }
+
+    .content-wrapper {
+      display: flex;           /* 啟用 flex 排版 */
+      align-items: top;     /* 垂直置中對齊 */
+      gap: 0px;  
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: left;
+      margin-bottom: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      transform: translateX(-5px);
+    }
+
+    .back-button span {
+      margin-left: 8px;
+    }
+
+    /* About Section */
+    .about {
+      min-height: 100vh;
+      padding: 100px 0;
+      position: relative;
+      display: block;
+      overflow: hidden;
+    }
+
+    .about-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('public/image/BlurFrontG.png');
+      background-size: 100% auto;
+      background-position: center 0px;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .about-bg {
+      transform: scaleX(1);
+    } 
+
+    .about::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      z-index: 0;
+    }
+
+    .about-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .about-img {
+      /*flex: 1;*/
+      height: 250px;
+      width: 250px;
+      background-image: url('public/image/123-black.jpg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 125px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-img:hover{
+      height: 250px;
+      width: 250px;
+      background-image: url('public/image/123-261.jpg');
+      transition: all 0.3s ease;
+    }
+
+    .about-content {
+      flex: 1;
+    }
+
+    .about-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .about-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    .about-content p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      gap: 10px;
+    }
+
+    .skill {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 100px 0;
+      position: relative;
+      min-height: 100vh;
+      display: block;
+      overflow: hidden;
+    }
+
+    .contact-bg {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('public/image/BlurFrontO.png');
+      background-size: 100% auto;
+      background-position: center 0px;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .contact-bg {
+      transform: scaleX(1);
+    } 
+
+    .contact::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      z-index: 0;
+    }
+
+    .contact-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 60px;
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .contact-info h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    .contact-info p {
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .contact-details {
+      margin-bottom: 30px;
+    }
+
+    .contact-details div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .contact-details i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+    }
+
+    .contact-icons {
+      margin-right: 15px;
+      width: 1.2rem;
+      height: 1.2rem;
+      vertical-align: text-bottom;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 0px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: 100%;
+      /*background-color: rgba(255, 255, 255, 0.1);*/
+      /*border-radius: 50%;*/
+      color: #fff;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      /*border: 1px solid rgba(255, 255, 255, 0.2);*/
+      opacity: 0.6;
+      filter: brightness(100) saturate(0);
+      aspect-ratio: 1.2 / 1;
+    }
+
+    .social-icons a:hover {
+      /*background-color: rgba(255, 255, 255, 0.2);*/
+      transform: translateY(-5px);
+      opacity: 0.8;
+      
+    }
+
+    .contact-form {
+      flex: 1;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #fff;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #fff;
+    }
+
+    .form-group textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    footer p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Responsive Styles */
+    @media (min-width: 993px) {
+      .about-img {
+        position: relative; top: -150px; left: -50px; 
+      }
+    }
+
+    @media (max-width: 992px) {
+      .about-container, .contact-container, .content-wrapper {
+        flex-direction: column;
+      }
+
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .project-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-bg, .projects-bg, .project-detail-bg, .about-bg, .contact-bg {
+        background-size: 180%;
+
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Hide all sections initially except home */
+    .section {
+      display: none;
+    }
+
+    #home-section {
+      display: block;
+    }
+
+    /* 影片 */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 比例 */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 顯示 */
+    .section {
+     opacity: 0;
+     transform: translateX(0px);
+     transition: opacity 01s ease, transform 0s ease;
+     pointer-events: none;
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     max-width: 100vw;
+     box-sizing: border-box
+    }
+
+    /* 顯示中狀態 */
+    .section.active {
+     opacity: 1;
+     transform: translateX(0);
+     pointer-events: auto;
+      position: relative;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo" id="home-link">Yen-Cheng Chou</a>
+
+      <!-- 漢堡選單控制 -->
+      <input type="checkbox" id="nav-toggle" />
+      <label for="nav-toggle" class="nav-toggle-label">☰</label>
+
+      <!-- 導覽選單 -->
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link" data-section="home-section">Home</a></li>
+        <li><a href="#" class="nav-link" data-section="projects-section">Projects</a></li>
+        <li><a href="#" class="nav-link" data-section="about-section">About</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Home Section (Hero) -->
+  <section id="home-section" class="section active">
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1>Portfolio -2024</h1>
+        <p>紀錄含2024年以前在校時期的其中5件作品，雖不喜歡隨意定義自己的設計傾向，但這幾項作品中顯示我傾向功能性的設計，並多以生活體驗為出發點，探索日常生活中的小細節與使用者需求。<br>
+        <br>
+          嘗試以 AI 氛圍編程 ( Vibe Coding ) 輔助設計網頁作品集，本網頁結合three. js互動模型展示、影片嵌入、以及響應式設計，邊做邊學，享受多元學習過程。希望各位老闆喜歡 !</p>
+        <a href="#" class="btn nav-link" data-section="projects-section">View Projects</a>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects-section" class="section active" >
+    <div class="projects">
+      <div class="projects-bg"></div>
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Projects</h2>
+        </div>
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card" data-project="project1">
+            <div class="project-img" style="background-image: url('public/image/sidegohead.png')"></div>
+            <div class="project-content">
+              <h3>SideGo<small>  Scooter Sidecar Trolley</small></h3>
+              <p>跨界速克達邊車</p>
+              <a href="#" class="btn view-project" data-project="project1">View Project</a>
+            </div>
+          </div>
+          
+          <!-- Project 2 -->
+          <div class="project-card" data-project="project2">
+            <div class="project-img" style="background-image: url('public/image/tb4.png')"></div>
+            <div class="project-content">
+              <h3>TURN BEAUTY<small>  全自動化妝機</small></h3>
+              <p>AIoT與次世代化妝解決方案</p>
+              <a href="#" class="btn view-project" data-project="project2">View Project</a>
+            </div>
+          </div>
+          
+          <!-- Project 3 -->
+          <div class="project-card" data-project="project3">
+            <div class="project-img" style="background-image: url('public/image/Cashhead.png')"></div>
+            <div class="project-content">
+              <h3>機動找錢包<small>  外送員專用防水錢包</small></h3>
+              <p>為戶外高頻率現金交易情境打造的快速找零工具</p>
+              <a href="#" class="btn view-project" data-project="project3">View Project</a>
+            </div>
+          </div>
+          
+          <!-- Project 4 -->
+          <div class="project-card" data-project="project4">
+            <div class="project-img" style="background-image: url('public/image/NChand.png')"></div>
+            <div class="project-content">
+              <h3>Casual Tools<small>  Nail Claner</small></h3>
+              <p>複合機能指甲剪｜修整 x 清潔</p>
+              <a href="#" class="btn view-project" data-project="project4">View Project</a>
+            </div>
+          </div>          
+
+          <!-- Project 5 -->
+           <div class="project-card" data-project="project5">
+            <div class="project-img" style="background-image: url('public/image/MEHU2.png')"></div>
+            <div class="project-content">
+              <h3>Monkey & Elephant<small>  戶外個人野餐桌</small></h3>
+              <p>家具概念設計專案</p>
+              <a href="#" class="btn view-project" data-project="project5">View Project</a>
+            </div>
+          </div>   
+          <!--
+          
+           <div class="project-card" data-project="project6">
+            <div class="project-img" style="background-color: #000; display: flex; justify-content: center; align-items: center;"><h3 style="font-size: 5rem; margin: 50px; text-align: center; justify-content: center; font-family: DotGothic16, sans-serif; transform: translateY(-10px);">About.</h3></div>
+            <div class="project-content">
+              <h3>Monkey & Elephant<small>  戶外個人野餐桌</small></h3>
+              <p>家具概念設計專案</p>
+              <a href="#" class="btn view-project" data-project="project6">View Project</a>
+            </div>
+          </div>    6 -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Detail Pages -->
+      <!-- P1 -->   
+  <section id="project1-detail" class="section project-detail active">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        
+        <h2>SideGo 跨界速克達邊車</h2>
+        <p>Scooter Sidecar Trolley // 2024畢業製作</p>
+      </div>
+      <div class="gallery-img" style="background-image: url('public/image/SChead.png'); flex:1; aspect-ratio: 2843 / 1040;"></div>
+
+      <h3><br></h3>
+    <div class="project-gallery">
+
+      
+      <div class="project-description">
+        <h3>01｜設計背景</h3>
+        <p>在速克達機車盛行的國家（如台灣等東南亞國家），使用速克達機車載運貨物是非常常見的行為。但在搬運體積龐大或重物時，我們常常在上下貨的過程中遇到困難。不僅因為載物空間有限而使人麻煩，
+          如果機車無法停靠在目的地附近，使用者也常常需要徒手搬運貨物才能上卸貨物。就算目的地備有推車，在取用的過程中也相當麻煩。另外一方面，如果是經常需要使用機車搬運的族群如外送員、餐廳備
+          料，轉換載具間的段差也會成為一種負擔。</p>
+        <div style="background-color: rgb(0, 0, 0); padding: 20px">
+          <div class="gallery-img" style="background-image: url('public/image/SCpepo.png'); flex:1; aspect-ratio: 1053 / 320;"></div>
+        </div>
+        <p></p>
+
+        <h3>02｜族群調查</h3>
+        
+        <p>實地造訪米糕店、生魚片攤、米行與外送員等經常仰賴機車載物的族群：</p>
+        
+        <div class="content-wrapper" style="gap: 10px;">
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>01｜米糕店</h2><p>需求為每日中午一次日常備料<br>備料內容為小菜用的食材，單趟運載量為45~60KG<br>載具為自用150cc速克達、推車</p></div>
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>02｜生魚片攤</h2><p>需求為每日清晨一次日常備料<br>備料內容為生魚片、海鮮等食材，單趟運載量為40~100KG<br>載具為自用150cc速克達、徒手搬運</p></div>
+        </div>
+
+        <div class="content-wrapper" style="gap: 10px; margin-top: 10px;">
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>03｜米行</h2><p>需求為每日二~十次日常送貨<br>送貨內容為商家訂購的米，單趟運載量為20~80KG以上<br>載具為自用125cc檔車、徒手搬運</p></div>
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>04｜外送員</h2><p>多載外送箱，可載運大單<br>載不同家外送箱，可增加接單頻率<br>偶需進室內，甚至送上樓、進電梯</p></div>
+        </div>
+        <p></p>
+        <div class="gallery-img" style="background-image: url('public/image/SCwork.png'); flex:1; aspect-ratio: 2353 / 491;"></div>  <p></p>
+        
+        <h3>03｜洞察</h3>
+
+        <p>觀察到：運輸的行為不只侷限在馬路上，而常延伸至巷弄、騎樓、甚至攤位後方的備料區。這些非道路空間往往無法直接以機車抵達，使得從機車到目的地之間的「最後幾步」成為最具挑戰的搬運環節。<br>
+           此外，我們注意到即便部分使用者會備有推車輔助，「推車」往往被視為額外的裝備，而非機車運輸流程的一部分。這導致了實際使用上的猶豫與斷裂，像是需來回取用、推車收納不便等情況，反而降低了整體運輸效率。</p>
+        <div class="content-wrapper">
+          <div class="gallery-img" style="background-image: url('public/image/SCcomic1.png'); flex:1; aspect-ratio: 774 / 268;"></div>
+          <div class="gallery-img" style="background-image: url('public/image/SCcomic2.png'); flex:1; aspect-ratio: 774 / 268;"></div>
+        </div>
+        <p></p>
+        <h3>04｜SideGo</h3>
+        <p>SideGo是一款可拆卸變形為手推車的速克達邊車，致力於為機車載貨情境提供更好的整合服務，以應對不同情境需求。
+          透過SideGo的銜接裝置，使用者可以輕鬆將SideGo從速克達上拆卸下來，並透過簡單的步驟便能將其從載物邊車轉換為載貨推車。
+          彌補了機車載物情境中無法延伸到的地方。</p>
+
+        <div class="gallery-img" style="background-image: url('public/image/SCtitle.png'); flex: 1; aspect-ratio: 192 / 106; position: relative;">
+          <!-- 左側：邊車模式 -->
+          <b style="position: absolute; left: 10%; top: max(10px, calc(30% - 2.8rem - 16px)); width: 40%;">
+            <span style="display: inline-block; background-color: rgba(0,0,0,0.3); color: white; padding: 8px 16px; border-radius: 10px; line-height: 1.4; font-size: clamp(12px, 2vw, 18px);">
+              邊車<br>模式</span>
+          </b>
+          <!-- 右側：推車模式 -->
+          <b style="position: absolute; left: 50%; top: max(10px, calc(30% - 2.8rem - 16px)); width: 40%;">
+            <span style="display: inline-block; background-color: rgba(0,0,0,0.3); color: white; padding: 8px 16px; border-radius: 10px; line-height: 1.4; font-size: clamp(12px, 2vw, 18px);">
+              推車<br>模式</span>
+          </b>
+        </div>
+
+        <div class="gallery-img" style="background-image: url('public/image/SCshot.png'); flex:1; aspect-ratio: 1881 / 3380;"></div>
+        
+        
+
+        <div style="background-color: rgba(255, 255, 255, 1); padding: 20px 0px 20px 10px; color: #373737; "><b style="font-size: 1.5rem;">｜使用情境</b>
+          <p style="margin: 0 30px 10px 20px;">SideGo能透過型態變化去適應兩種狀態,分別是邊車模式與推車模式。<br>
+          邊車模式是透過銜接器去銜接變形推車,當推車於前輪抬起的邊車狀態時能提供大尺寸、大重量的車道運輸功能,使載重時能維持舒適的騎乘姿勢與駕駛靈活度。而當變形推車
+          提起把手,前輪下放觸地時,可與銜接器分離,成為推車狀態,進一步輔助所載重物前往到非車道地區,如巷弄、電梯、人行道、室內等…</p></div>
+        <div>
+          <div class="gallery-img" style="background-image: url('public/image/SCsec1.png'); flex:1; aspect-ratio: 2385 / 1077;"></div>
+          <div class="gallery-img" style="background-image: url('public/image/SCsec2.png'); flex:1; aspect-ratio: 2385 / 1077;"></div>
+        </div>
+        
+
+        <div style="background-color: rgba(255, 255, 255, 1); padding: 20px 0px 20px 10px;"><b style="color: #373737; font-size: 1.5rem;">｜操作介紹</b></div>
+
+        <div style="background-color: rgba(255, 255, 255, 1);">
+          <div style="position: relative; width: 100%; aspect-ratio: 2155 / 788; display: flex; flex-wrap: wrap; gap: 10px;">
+              <!-- 上排 3 張 -->
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('public/image/SC1_2.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">邊車</p>
+              </div>
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('public/image/SC2_2.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">抽出手把</p>
+              </div>
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('public/image/SC3_2.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">提起手把</p>
+              </div>
+
+              <!-- 下排 2 張：第4個加 margin-left 讓置中 -->
+              <div style="width: calc(33.333% - 7px); margin-left: calc(16.666% + 5px);">
+                <div style="background-image: url('public/image/SC4_2.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">解開插銷</p>
+              </div>
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('public/image/SC5_2.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">推車</p>
+              </div>
+          </div>
+        </div>
+        <p></p>
+
+        <h3>05｜適配性設計</h3>
+        <p>SideGo的銜接裝置除了提供了順暢且方便的銜接系統外，也嘗試以更方便且契合人心的安裝設計。為了適配於速克達機車上，設置上使用大多數速克達所具有的前腳踏板和後搖臂上的安裝點，提供了一個不具破壞性的改裝方案。此外因為需要適配不同的速克達車型，銜接裝置設計以多方位適配機制，解決各種情況下出現的鎖點位置差異。<br>
+        銜接裝置的段差回饋與轉軸回饋，可以應對機車立中柱時所產生的角度差與斷差。
+        </p>
+        <div class="gallery-img" style="background-image: url('public/image/SCad1.png'); aspect-ratio: 1395 / 654;"></div>
+        <div class="content-wrapper" style="background-color: rgba(255, 255, 255, 1);">
+          <div class="gallery-img" style="background-image: url('public/image/SCad2.png'); flex:1; aspect-ratio: 787 / 473; margin-top: 10px;"></div>
+          <div class="gallery-img" style="background-image: url('public/image/SCad4.png'); flex: 1; aspect-ratio: 849 / 489; background-size: contain;"></div>
+        </div>
+
+        <p></p>
+        <div style="background-color: rgba(0, 0, 0, 0.4); padding: 40px 10px; border-radius: 10px;">
+          <div class="gallery-img" style="background-image: url('public/image/SCad31.png'); flex: 2; aspect-ratio: 1025 / 425; background-size: contain; position: relative;">
+            <p style=" position: absolute; bottom: 22.5%; left: 3.8%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              滑軌</p>
+            <p style=" position: absolute; bottom: 59%; left: 5.8%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              後固定點</p>
+            <p style=" position: absolute; bottom: 78.2%; left: 17.3%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              插銷</p>
+            <p style=" position: absolute; bottom: 70%; left: 34%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              高度適配</p>
+            <p style=" position: absolute; bottom: 1.5%; left: 32.4%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              轉軸回饋</p>
+            <p style=" position: absolute; bottom: 16.5%; left: 37.5%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              段差回饋</p>
+            <p style=" position: absolute; bottom: 33.4%; left: 48.5%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              長度適配</p>
+            <p style=" position: absolute; bottom: 84%; left: 49%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              後鎖點</p>
+            <p style=" position: absolute; bottom: 62.6%; left: 62.4%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              前鎖點</p>
+          </div>
+        </div>
+        
+        <p></p>
+        <h3>06｜載物能力</h3>
+        <p>SideGo常規下有52*100平方公分的載物平面。<br>
+          載物平面四周設有可調整護欄，除了提供可以使用綁帶的機能結構外，也可以依照需求調整護欄
+          角度以容納超過載物平面的貨物</p>
+        <div style="position: relative; display: flex; flex-wrap: wrap; gap: 10px;">
+          <div class="gallery-img" style="background-image: url('public/image/SCcap1.png'); flex:1; aspect-ratio: 442 / 411;"></div>
+          <div class="gallery-img" style="background-image: url('public/image/SCcap2.png'); flex:1; aspect-ratio: 442 / 411;"></div>
+        </div>
+        <p></p>
+
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/HFUrP6WN1n8?si=FryYd29-ro-U1CzU" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe></div>
+      </div>
+
+      <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+        <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+          
+          <!-- 左側文字區塊 -->
+          <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 300px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 30px;">｜新一代設計展</h3>
+            
+              <p>設計團隊：</p>
+              <p><br></p>
+              <p>周言丞｜</p>
+              <p><br></p>
+              <p>詹秉翰｜</p>
+            
+            <div style="position: absolute; bottom: 20px;">
+              <p>Design in 2024</p>
+            </div>
+          </div>
+
+          <!-- 右側圖片區塊（RWD 可擴充） -->
+          <div style="
+            flex: 1.5;
+            margin: 20px;
+            max-width: 1000px;
+            min-width: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          ">
+            <img 
+              src="public/image/SCnewd.png" 
+              style="
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                display: block;
+                max-width: 100%;
+              "
+            >
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+    </div>
+  </section>
+
+      <!-- P2 -->
+  <section id="project2-detail" class="section project-detail active">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        <h2>TURN BEAUTY 全自動化妝機</h2>
+        <p>AIoT與次世代化妝解決方案</p>
+      </div>
+      
+      <div class="project-gallery">
+        <div class="gallery-img" style="background-image: url('public/image/TBcov.png'); flex:1; aspect-ratio: 2843 / 1040;"></div>
+        
+      <div class="project-description">
+        <br>
+        <h3>01｜設計理念</h3>
+           <p>傳統化妝行為對手部身障者而言是一項極具挑戰的任務，日常的自我照顧因此變得高度依賴他人。本專案初期聚焦於手部障礙者的日常需求，透過使用者訪談與實際情境模擬，
+            發現「化妝」不僅是美觀的追求，更承載著自我認同與社交參與的意義。因此，我們希望透過設計，回應「自主美的權利」這個核心價值
+            。
+           </p>
+           <div class="gallery-img" style="background-image: url('public/image/TB01.png'); flex: 1 1 20%; aspect-ratio: 1920 / 692;"></div>
+           <br>
+
+        <h3>02｜TURN BEAUTY</h3>
+           <p>TURN BEAUTY 起始於對手部障礙者化妝困境的關注，並延伸出一套可廣泛適用的自動化妝解法。，透過臉部掃描、AI 辨識與機構控制三項技術整合，讓化妝變得更直覺、輕鬆，成為每個人都能擁有變好看的契機。</p>
+           <div class="gallery-img" style="background-image: url('public/image/TB02.png'); flex: 1 1 20%; aspect-ratio: 2120 / 1080;"></div></p>
+        
+        <h3>03｜系統構成與互動流程</h3>
+        <p>TURN BEAUTY 採用人機互動介面與精密機構整合設計，使用者可透過螢幕操作或語音控制完成妝容選擇。系統結合 AR 技術即時模擬妝容，協助使用者確認風格與色調後進入施作階段。
+          此時，螢幕翻轉開啟，露出內建化妝機構——一個貼合人臉輪廓的半球型凹槽，搭載可旋轉與伸縮的多功能噴槍。</p>
+        <p>噴槍具備角度調節、噴嘴切換與出力微調能力，並配合紅外線追蹤裝置，即時偵測使用者位置，自動校正上妝動作，確保每一步都穩定精確。整體系統整合感測、演算與執行單元，
+          實現化妝流程的全自動化與高容錯率。</p>
+          <div class="gallery-img" style="background-image: url('public/image/TBMech.png'); aspect-ratio: 2923 / 985;"></div></p>
+
+             <div style="flex:1; background-color: rgba(0, 0, 0, 0.3); border-radius:10px;">
+              <!-- 第一層 -->
+            <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px;">
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>1｜支援語音指令</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('public/image/TB002.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">身障、手部不方便者能安心使用</span></div>
+              </div>
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>2｜AR模擬上妝</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('public/image/TB003.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">及時模擬上妝效果</span></div>
+              </div>
+            </div>
+
+            <!-- 第二層 -->
+            <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px;">
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>3｜精密全自動噴槍、掃瞄系統</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('public/image/TB001.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                <div class="skills" style="margin-bottom: 20px;">
+                  <span class="project-description-bar">紅外線立體掃描</span>
+                  <span class="project-description-bar">防呆影像辨識、監控</span>
+                  <span class="project-description-bar">底妝、眼妝、眉毛，三種專用噴頭</span>
+                  <span class="project-description-bar">自動調控妝品成分</span>
+                  <span class="project-description-bar">全方位零死角噴塗</span>
+                  <span class="project-description-bar">兩側同時作動，高效上妝</span></div>
+              </div>
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>4｜一次性抿式唇膏</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('public/image/TB004.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">自動調整高度、距離</span>
+                    <span class="project-description-bar">自動調控唇膏成分、形狀</span>
+                    <span class="project-description-bar">一次性抿唇紙</span>
+                    <span class="project-description-bar">抿式唇膏方便、光澤漂亮</span>
+                    <span class="project-description-bar">兼顧衛生</span></div>
+              </div>
+            </div>
+
+            <!-- 第三層 -->
+            <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px;">
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>5｜下側抽風口</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('public/image/TB005.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                <div class="skills" style="margin-bottom: 20px;">
+                  <span class="project-description-bar">防止粉塵停留，吸入鼻腔、肺部</span></div>
+              </div>
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>6｜語音提示</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('public/image/TB006.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">於噴塗時提供相關提示</span></div>
+              </div>
+            </div></div>
+
+        <h3>04｜流程</h3></p>
+        <p>AR試妝介面</p></p>
+          <div class="gallery-img" style="background-image: url('public/image/TBUI.png'); aspect-ratio: 1103 / 272; position: relative;">
+          </div><h3> <br></h3>
+
+        <p>操作流程</p></p>
+          <div class="gallery-img" style="background-image: url('public/image/TBtre.png'); aspect-ratio: 1073 / 272; position: relative;">
+          </div><h3> <br></h3>
+
+        <h3>05｜未來應用與社會影響</h3>
+        <p>TURN BEAUTY 不僅是為身障者設計的輔助工具，更是一種全新的美妝體驗提案。未來它可廣泛部署於便利商店、百貨商場、交通樞紐等公共場域，提供即時且標準化的化妝服務，
+          讓臨時有妝容需求的使用者快速應對重要場合。透過數據學習與雲端優化，系統將持續提升妝容選擇與精準度，逐步演進為個人化美容顧問平台。TURN BEAUTY 不只是解決問題的產品，
+          更試圖開啟一場化妝文化的革新——讓「自動化妝」成為潮流，讓每個人都想體驗一次未來化妝的新可能。</p>
+
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/0dmIfGGDAdU?si=7QfHL9o6bxnx1cUC" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe></div>
+          </p>
+        <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+          <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+            
+            <!-- 左側文字區塊 -->
+            <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 350px;">
+              <h3>｜實作與設計團隊</h3>
+              
+                <p>設計團隊：</p>
+                
+                <p>張岱玲｜訪談、設計、UI、平面</p>
+                
+                <p>董清茂｜訪談、模型製作</p>
+                
+                <p>周言丞｜設計、機構設計、系統整合、建模、渲染、3D列印、剪輯</p>
+              
+              <div style="position: absolute; bottom: 0px;">
+                <p>Design in 2023</p>
+              </div>
+            </div>
+
+            <!-- 右側圖片區塊（RWD 可擴充） -->
+            <div style="
+              flex: 1.2;
+              margin: 20px;
+              max-width: 1000px;
+              min-width: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <img 
+                src="public/image/TBFa.jpg" 
+                style="
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  display: block;
+                  max-width: 100%;
+                "
+              >
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+        <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      </div>
+  </section>
+
+      <!-- P3 -->
+  <section id="project3-detail" class="section project-detail active">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        <h2>機動找錢包｜外送員專用防水錢包</h2>
+        <p>為戶外高頻率現金交易情境打造的快速找零工具</p>
+      </div>
+      <div class="project-gallery">
+        <div class="gallery-img" style="background-image: url('public/image/CASHston.png'); flex:1; aspect-ratio: 2843 / 1040;"></div>
+        <br>
+      <div class="project-description">
+        <h3>01｜設計背景</h3>
+           <p>外送服務中仍有不少使用現金交易的情況，外送員在處理找零時，常面臨效率與收納的雙重困擾。實際觀察中可見，多數外送員會使用防水袋分裝紙鈔與硬幣，或直接使用一般皮夾。然而這些方式在工作場域內的使用不夠直覺，特別在下雨、光源不足或需要單手操作的情境中，常導致動作遲緩、找錯金額。<br>
+           因此本設計目標為提供一款能快速取用硬幣、分類清楚且具防水性的專用錢包，讓找零成為一個流暢的動作，而不是一項多餘的負擔。</p>
+           <div class="gallery-img" style="background-image: url('public/image/CASHmoney.png'); flex: 1 1 20%; aspect-ratio: 1280 / 417;"></div>
+          <br>
+
+        <h3>02｜設計理念</h3>
+           <p>參考彈簧式找零盒中可一一撥出硬幣的模組。收納方式則取材自工人腰包的可翻捲設計，讓整體體積在收納時更緊湊，使用時能一翻即開。<br>
+              內部設有紙鈔收納空間，硬幣與紙鈔分區明確，便於整理與使用。整體設計偏向外掛型態，可輕鬆繫在腰部，使用上更靈活。</p>
+            <div class="gallery-img" style="background-image: url('public/image/CASHconcept.png'); flex: 1 1 20%; aspect-ratio: 2824 / 760;"></div>
+            <div class="gallery-img" style="background-image: url('public/image/CASHall.png'); flex: 1 1 20%; aspect-ratio: 3568 / 1821; margin-top: 0px;"></div>
+            <div style="display: flex; gap: 0px; flex-wrap: wrap; margin-top: 10px;">
+              <div class="gallery-img" style="background-image: url('public/image/CASHcoin.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1080; background-color: #ffffff;"></div>
+              <div class="gallery-img" style="background-image: url('public/image/CASHmon.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1080; background-color: #ffffff;"></div>
+              <div class="gallery-img" style="background-image: url('public/image/CASHback.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1080; background-color: #ffffff;"></div>
+            </div>
+            <div style="display: flex; gap: 0px; flex-wrap: wrap; margin-top: 10px;">
+              <div class="gallery-img" style="background-image: url('public/image/Cashhead3.png'); flex: 1 1 20%; aspect-ratio: 1 / 1;"></div>
+              <div class="gallery-img" style="background-image: url('public/image/Cashhead2.png'); flex: 1 1 20%; aspect-ratio: 1 / 1;"></div>
+            </div>
+           <p></p>
+
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/1GJ9jggI-t4?si=Y-alohpjOG3cxQ9-" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe></div>
+            <p></p>
+           
+        <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+          <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+            <!-- 左側文字區塊 -->
+            <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 250px;">
+              <h3>｜實作</h3>
+              
+                <p>實際操作中，可快速展開錢包、撥出硬幣並順利取出紙鈔，找零流程順暢，操作後再迅速收捲固定，符合戶外工作者的使用節奏與習慣。</p>
+              
+              <div style="position: absolute; bottom: 0px;">
+                <p>Design in 2022</p>
+              </div>
+            </div>
+
+            <!-- 右側圖片區塊（RWD 可擴充） -->
+            <div style="
+              flex: 1;
+              margin: 20px;
+              max-width: 1000px;
+              min-width: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <img 
+                src="public/image/CASHproto.png" 
+                style="
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  display: block;
+                  max-width: 100%;
+                "
+              >
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+        <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      </div>
+  </section>
+
+      <!-- P4 -->
+  <section id="project4-detail" class="section active">
+    <div class="project-detail">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        <h2>Casual Tools 複合機能指甲剪</h2>
+        <p>｜修整 x 清潔</p>
+      </div>
+      <div class="project-gallery">
+        <div class="viewer-container" id="viewer-casualtools" style="width:100%; height: 400px; border-radius: 16px;; position:relative;"></div> 
+
+      </div>
+      <div class="project-description">
+        <h3>01｜設計理念</h3>
+           <p>觀察戶外活動者與工作型使用者的日常後，我們發現指甲清潔與修整常因工具分散、場地限制而被忽略。尤其指縫髒污與剪屑飛濺的問題，在移動或戶外情境中更難處理。這款指甲剪整合修剪、清潔、磨整三種功能，讓手部修整流程更完整、集中，提升清潔效率與操作整潔度。</p>
+           <div class="gallery-img" style="background-image: url('public/image/NCtex.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1008;"></div>
+           <br>
+
+        <h3>02｜功能整合與外型構成</h3>
+           <p>產品外型採圓潤鵝卵石形，結合功能所需的結構比例，適合日常攜帶使用。主要機能設計如下：</p>
+           <p><span class="project-description-bar">剪刀機構</span>｜封閉式指甲鉗，可防止指甲屑外噴，卡扣設計亦可暫時存放指甲屑<br>
+           <span class="project-description-bar">清潔刷頭</span>｜另一側撥鍵推出短硬刷，強化指縫髒污清除效果<br>
+           <span class="project-description-bar">磨甲砂面</span>｜剪口兩側設有粗細雙面磨砂區，修剪後可直接整型甲緣<br>
+           <span class="project-description-bar">材質設定</span>｜外殼使用塑膠製成，具基本防潑水性，適應多種使用環境</p>
+           <div class="gallery-img" style="background-image: url('public/image/NCD1.png'); flex: 1 1 20%; aspect-ratio: 48 / 19;"></div>
+           <div class="gallery-img" style="background-image: url('public/image/NCinter.png'); flex: 1 1 20%; aspect-ratio: 48 / 19;"></div></p>
+        
+        <h3>03｜使用情境與應用優勢</h3>
+        <p>產品適合從事戶外活動、手作、園藝工作的族群。透過集中整合的清潔與修整流程，使用者可在活動後快速完成指甲清潔，
+          避免因藏污導致不適或衛生疑慮。</p>
+        <div class="gallery-img" style="background-image: url('public/image/NCfoot.png'); aspect-ratio: 3 / 1.25;"></div>
+        <h3> <br></h3>
+
+        
+        <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+          <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+            <!-- 左側文字區塊 -->
+            <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 400px;">
+              <h3>｜實作</h3>
+              
+                <p>模型測試中搭配日常洗手流程使用，在製作油土模型之後設計師們常常沒辦法洗乾淨指甲縫隙，常備一具牙刷是個辦法但觀察後發現多數人並沒有意願為此攜帶一個專門清理手部的牙刷，但使用這個整合過的指甲剪就方便許多。刷毛硬度實測能有效清理頑固指縫污垢，搭配肥皂或洗手劑使用效果更加，驗證功能整合的實用性。</p>
+              
+              <div style="position: absolute; bottom: 0px;">
+                <p>Design in 2022</p>
+              </div>
+            </div>
+
+            <!-- 右側圖片區塊（RWD 可擴充） -->
+            <div style="
+              flex: 1;
+              margin: 20px;
+              max-width: 1000px;
+              min-width: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <img 
+                src="public/image/Proto.png" 
+                style="
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  display: block;
+                  max-width: 100%;
+                "
+              >
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+        <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      </div>
+      </div>
+  </section>
+
+      <!-- P5 -->
+<section id="project5-detail" class="section project-detail active">
+
+  <div class="project-detail-container">
+    <div class="project-detail-bg"></div>
+    <!-- 返回按鈕 -->
+    <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+
+    <!-- 頁首 -->
+    <div class="project-detail-header">
+      <h2>Monkey & Elephant 戶外個人野餐桌</h2>
+      <p>家具概念設計專案</p>
+    </div>
+
+    <!-- 首圖 -->
+    <div class="project-gallery">
+      <div class="gallery-img" style="background-image: url('public/image/MEHU1.png'); flex: 1 1 20%; aspect-ratio: 3095 / 1080;"></div>
+    </div>
+
+    <!-- 內文段落 -->
+    <div class="project-description">
+      <h3>01｜設計背景</h3>
+      <p>
+        疫情後時代，人們的生活樣態產生改變，戶外活動與個人或小型娛樂成為新趨勢。<br>
+        Monkey & Elephant 以「個人野餐」為情境出發，思考能夠擺脫傳統桌子依賴地面擺放的限制，讓人可以在森林、草地、甚至斜坡上也能創造出一個舒適的、屬於自己的輕便休閒空間。
+      </p>
+
+      <h3>02｜設計理念：「靈活的猴子」與「可靠的大象」</h3>
+      <p>Monkey & Elephant 由兩個角色構成：</p>
+
+      <!-- 桌身與軟件內容區塊 -->
+      <div style="flex:1; background-color: rgba(0, 0, 0, 0.3); border-radius:10px;">
+        <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px; display: flex; flex-wrap: wrap;">
+
+          <!-- Monkey 區塊 -->
+          <div style="flex:1; padding: 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+            <h2>桌身｜Monkey</h2>
+            <div class="gallery-img" style="
+              aspect-ratio: 272 / 204;
+              margin: 10px 0px -20px 0px;
+              background-image:url('public/image/MONR.png');
+              background-size:contain;
+              background-repeat: no-repeat;
+              background-position: center;
+              max-width: 500px;
+              min-width: 0;">
+            </div>
+            <p>
+              • 可透過束帶結構固定於樹幹或柱體<br>
+              • 桌面角度可調整，具備類似螺母鎖定的旋鈕設計，透過旋開旋鈕，可調前後仰與左右斜兩軸方向傾角<br>
+              • 束帶設計亦可轉化為背帶功能，方便攜帶<br>
+              • 安裝直觀快速，讓使用者能輕鬆在戶外建立屬於自己的桌面空間
+            </p>
+          </div>
+
+          <!-- Elephant 區塊 -->
+          <div style="flex:1; padding: 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+            <h2>軟件｜Elephant</h2>
+            <div class="gallery-img" style="
+              aspect-ratio: 272 / 204;
+              margin: 10px 0px -20px 0px;
+              background-image:url('public/image/ELER.png');
+              background-size:contain;
+              background-repeat: no-repeat;
+              background-position: center;
+              max-width: 500px;
+              min-width: 0;">
+            </div>
+            <p>
+              • 聚酯棉填充與EVA分層具有高穩定性與柔軟度<br>
+              • 可單獨作為地面沙發墊使用，增加戶外舒適性<br>
+              • 與 Monkey 組合時，成為下方支撐基座<br>
+              • 軟材能夠服貼地形、吸收傾斜，維持 Monkey 桌面水平<br>
+              •	防水材質<br><br><br>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <h3 style="font-size: 1.8rem; margin-bottom: 20px;">03｜設計細節</h3>
+        <div class="gallery-img" style="background-image: url('public/image/MEadd.png'); flex: 1; aspect-ratio: 2666 / 2163;"></div></p>
+        <div class="gallery-img" style="background-image: url('public/image/MEbook.png'); flex: 1; aspect-ratio: 2230 / 550;"></div></p>
+
+
+      <!-- 使用情境區 -->
+      <h3 style="font-size: 1.8rem; margin-bottom: 20px; margin-top: 20px;">04｜使用情境</h3>
+      <p>
+        Monkey & Elephant是一套可以依據場地、需求與使用情境自由轉換的個人戶外生活工具組。它呈現三種核心使用型態：
+      </p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; max-width: 100%;">
+        <div style="flex: 1; max-width: 300px;">
+          <b style="font-size: 1.2rem;">① 側背攜行</b>
+          <div class="gallery-img" style="aspect-ratio: 496 / 786; background-image: url('public/image/me33.png'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 10px;"></div>
+        </div>
+        <div style="flex: 1; max-width: 300px;">
+          <b style="font-size: 1.2rem;">② 地上茶几</b>
+          <div class="gallery-img" style="aspect-ratio: 496 / 786; background-image: url('public/image/me22.png'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 10px;"></div>
+        </div>
+        <div style="flex: 1; max-width: 300px;">
+          <b style="font-size: 1.2rem;">③ 掛樹坐地</b>
+          <div class="gallery-img" style="aspect-ratio: 496 / 786; background-image: url('public/image/me11.png'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 10px;"></div>
+        </div>
+      </div><p></p>
+      <p><span class="project-description-bar">側背攜行</span><br>
+        Monkey 上的束帶不僅是固定結構，也可在收納後轉換為側背帶。重量輕巧，可單人背負移動，極適合短程徒步或野外漫遊。</p>
+      <p><span class="project-description-bar">地上茶几</span><br>
+        Monkey 與 Elephant 結合。Elephant 的軟材質讓整體可依地形變形貼合，使桌面仍保持穩定，讓使用者坐於地面或野餐墊旁使用桌面。</p>
+      <p><span class="project-description-bar">掛樹坐地</span><br>
+        Monkey 綁附在樹幹上作為懸掛式桌面，Elephant 放置於地面，使用者可坐在 Elephant 上進行野餐或休憩。Monkey 透過旋鈕結構調整角度，桌面能在各種樹幹與粗度條件下維持水平。</p>
+        
+
+      <!-- 影片區 -->
+      <div class="video-container" style="margin-top: 20px;">
+        <iframe src="https://www.youtube.com/embed/AmuzNCxY56k?si=_Pi9xOlPTu-f6nO_" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe>
+      </div><p></p>
+
+      <!-- 實作敘述區 -->
+        <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+          <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+            <!-- 左側文字區塊 -->
+            <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 400px;">
+              <h3>｜實作</h3>
+              
+                <p>
+                  本專案以日本隈研吾 Kagu 設計競賽為目標進行開發，並同步結合校內的「原型設計課程」，完成了可實際使用的實體模型。<br>
+
+                  在實作階段，原先對於 Monkey 懸掛於樹上時的承重與穩定性有所疑慮，擔心角度鎖定機構會在使用中因重力或晃動而鬆脫。<br>
+
+                  但經實地測試與實際操作後，發現整體結構表現穩定、承重良好，Monkey 即使放置水瓶、餐盒等野餐物品，也能維持角度不滑動，達到原先設計預期。</p>
+              
+              <div style="position: absolute; bottom: 0px;">
+                <p>Design in 2022</p>
+              </div>
+            </div>
+
+            <!-- 右側圖片區塊（RWD 可擴充） -->
+            <div style="
+              flex: 1;
+              margin: 20px;
+              max-width: 1000px;
+              min-width: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <img 
+                src="public/image/MEproto.png" 
+                style="
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  display: block;
+                  max-width: 100%;
+                "
+              >
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+        <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      </div>
+
+  </div>
+</section>
+
+
+  <!-- About Section -->
+  <section id="about-section" class="section active">
+    <div class="about">
+      <div class="about-bg"></div>
+      <div class="container">
+        <div class="about-container">
+          <div class="about-img"></div>
+          <div class="about-content">
+            <h2>Hi</h2>
+            <p>我是周言丞，2024年畢業於雲林科技大學工業設計系。</p>
+            <p>大學四年熟悉sketch、建模、模製、展板平面設計等技能。</p>
+            <p>對建模有一定的熱誠，能夠使用Rhino、Blender、Cero(Pro E)、Solid Works、Keyshot、SketchUp、Alias。協助畢業籌備委員會主視覺主要建模。<br>
+              目前精熟Rhino曲面建模與Blender meshing，習慣使用Blender材質/場景渲染與3D動畫製作、素材製作與引用、插件使用等協力工具。<br>
+              也正在努力精通Solid Works。</p>
+              <p>平面設計，能夠使用Adobe illustrator、Photoshop。<br>
+              另外，能使用Adobe Premiere Pro剪輯軟體。能負責製作產品形象與解說影片。</p>
+              <p>實際模製，熟悉木工機具操作、PU/EK模製、3D列印操作（FDM、SLA）、紙模型建制/輸出與製作、模型噴漆與實習時操作過靜電烤漆。</p>
+              <p>包含這次網頁式作品集使用AI分圍編程，邊做邊學下理解Html基礎結構與包含css、js等語言的概念。</p>
+              <p>喜歡邏輯思辨，對專業知識學習有熱誠。專題團隊中擅長扮演分析者，對工業設計、產品設計類的新資訊具有一定的掌握度，經常提供有用情報與概念的實務應用方法。</p>
+            <div class="skills">
+              <span class="skill">3D設計/渲染/動畫</span>
+              <span class="skill">草模製作</span>
+              <span class="skill">木工機具操作</span>
+              <span class="skill">3D列印</span>
+            </div>
+            <p> </p>
+
+            <h2>Software Skills</h2>
+            <p style="display: inline-block; font-size: 1rem; margin: 0;">平面設計</p>
+            <div class="skills" style="margin-top: 10px; margin-bottom: 20px;">
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo1.png" style="width: 20px; height: 20px; vertical-align: middle;">illustrator</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo2.png" style="width: 20px; height: 20px; vertical-align: middle;">Photoshop</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo3.png" style="width: 20px; height: 20px; vertical-align: middle;">inDesign</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo4.png" style="width: 20px; height: 20px; vertical-align: middle;">Procreate</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo5.png" style="width: 20px; height: 20px; vertical-align: middle;">Auto CAD 2D</p>
+            </div>
+            <p style="display: inline-block; font-size: 1rem; margin: 0;">影片剪輯</p>
+            <div class="skills" style="margin-top: 10px; margin-bottom: 20px;">
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo6.png" style="width: 20px; height: 20px; vertical-align: middle;">Premiere Pro</p>
+            </div>   
+            <p style="display: inline-block; font-size: 1rem; margin: 0;">3D建模/渲染/動畫</p>
+            <div class="skills" style="margin-top: 10px; margin-bottom: 20px;">
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo7.png" style="width: 20px; height: 20px; vertical-align: middle;">Rhinoceros</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo8.png" style="width: 20px; height: 20px; vertical-align: middle;">Blender</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo9.png" style="width: 20px; height: 20px; vertical-align: middle;">Shapr3D</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo10.png" style="width: 20px; height: 20px; vertical-align: middle;">Cero</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo11.png" style="width: 20px; height: 20px; vertical-align: middle;">SketchUP</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo12.png" style="width: 20px; height: 20px; vertical-align: middle;">Alias</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="public/LOGOs/logo13.png" style="width: 20px; height: 20px; vertical-align: middle;">Keyshot</p>
+            </div>   
+
+          <p> </p>
+            <h2>Contact</h2>
+            <p></p>
+            <div class="content-wrapper">
+              <div class="contact-details" style="flex: 1;">
+                <div>
+                  <img src="public/image/mail.png" alt="email_icon" class="contact-icons" />
+                  <span>yengchengchou@gmail.com</span>
+                </div>
+                <div>
+                  <img src="public/image/phone.png" alt="phone_icon" class="contact-icons" />
+                  <span>+886 966 422 126</span>
+                </div>
+                <div>
+                  <img src="public/image/locate.png" alt="locate_icon" class="contact-icons" />
+                  <span>Chia Yi City, TW</span>
+                </div>
+              </div>
+              <div class="social-icons" style="flex: 2; flex-direction: row; height: 100px; display: flex;">
+                <a href="https://www.linkedin.com/in/yen-cheng-chou-368649219" target="_blank" rel="noopener" style="background-image: url('public/image/LinkedIn.png'); background-size: contain; flex: 1; background-position: center; background-repeat: no-repeat;"><span></span></a>
+                <a href="https://www.facebook.com/profile.php?id=100091496049902&locale=zh_TW" target="_blank" rel="noopener" style="background-image: url('public/image/facebook.png'); background-size: contain; flex: 1; background-position: center; background-repeat: no-repeat;"><span></span></a>
+                <a href="https://www.behance.net/yengchengchou" target="_blank" rel="noopener" style="background-image: url('public/image/behance.png'); background-size: contain; flex: 1; background-position: center; background-repeat: no-repeat;"><span></span></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact-section" class="section active">
+    <div class="contact-bg"></div>
+    <div class="contact" style="min-height: 100vh;">
+      <div class="container">
+        <div class="contact-container">
+          <div class="contact-info">
+            <h2>Contact</h2>
+            <p></p>
+            <div class="contact-details">
+              <div>
+                <img src="public/image/mail.png" alt="email_icon" class="contact-icons" />
+                <span>yengchengchou@gmail.com</span>
+              </div>
+              <div>
+                <img src="public/image/phone.png" alt="phone_icon" class="contact-icons" />
+                <span>+886 966 422 126</span>
+              </div>
+              <div>
+                <img src="public/image/locate.png" alt="locate_icon" class="contact-icons" />
+                <span>Chia Yi City, TW</span>
+              </div>
+            </div>
+            <div class="social-icons">
+              <a href="https://www.linkedin.com/in/yen-cheng-chou-368649219" target="_blank" rel="noopener" style="background-image: url('public/image/LinkedIn.png'); background-size: cover;"><span></span></a>
+              <a href="https://www.facebook.com/profile.php?id=100091496049902&locale=zh_TW" target="_blank" rel="noopener" style="background-image: url('public/image/facebook.png'); background-size: cover;"><span></span></a>
+              <a href="https://www.behance.net/yengchengchou" target="_blank" rel="noopener" style="background-image: url('public/image/behance.png'); background-size: cover;"><span></span></a>
+            </div>
+          </div>
+          <!-- Contact Section
+          <div class="contact-form">
+            <form action="#">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Yen-Cheng Chou Industrial Design Portfolio.</p>
+    </div>
+  </footer>
+
+  <script>
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', function () {
+        // 手機點擊時，先移除其他卡片 active，再加上自己
+        document.querySelectorAll('.project-card.active').forEach(c => {
+          if (c !== card) c.classList.remove('active');
+        });
+        card.classList.toggle('active');
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('.section');
+      const homeLink = document.getElementById('home-link');
+
+      // 點首頁連結
+      homeLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        showSection('home-section');
+      });
+
+      // 點導覽連結
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const sectionId = this.getAttribute('data-section');
+          showSection(sectionId);
+        });
+      });
+
+      // 點專案細節按鈕
+      const projectButtons = document.querySelectorAll('.view-project');
+      projectButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const projectId = this.getAttribute('data-project');
+          showSection(`${projectId}-detail`);
+        });
+      });
+
+      function showSection(sectionId) {
+        scrollToTop(300);
+
+        sections.forEach(section => {
+          // 移除動畫類別（會觸發淡出）
+          section.classList.remove('active');
+
+          // 動畫結束後再隱藏
+          setTimeout(() => {
+            if (section.id !== sectionId) {
+              section.style.display = 'none';
+            }
+          }, 400); // 需與 CSS transition 時間相符
+        });
+
+        const target = document.getElementById(sectionId);
+        if (target) {
+          // 顯示目標區塊
+          target.style.display = 'block';
+
+          // 強制重排以啟動動畫（確保 transition 能運作）
+          void target.offsetWidth;
+
+          // 加上動畫類別觸發淡入
+          target.classList.add('active');
+        }
+      }
+
+      function scrollToTop(duration = 0) {
+        const start = window.scrollY;
+        const startTime = performance.now();
+
+        function animateScroll(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          window.scrollTo(0, start * (1 - ease));
+          if (progress < 1) {
+            requestAnimationFrame(animateScroll);
+          }
+        }
+
+        requestAnimationFrame(animateScroll);
+      }
+
+      // 背景視差滾動
+      /*window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const bgSections = document.querySelectorAll('.hero, .projects, .about, .contact, .project-detail');
+        bgSections.forEach(section => {
+          const offset = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrolled >= offset - window.innerHeight && scrolled <= offset + height) {
+            const yPos = (scrolled - offset) * 0.4;
+            section.style.backgroundPosition = `center ${-yPos}px`;
+          }
+        });
+      });*/
+
+      // 初始載入時顯示 home-section
+      showSection('home-section');
+    });
+
+      function fixToViewport() {
+        const bgElements = document.querySelectorAll('.hero-bg, .project-detail-bg, .about-bg, .contact-bg , .projects-bg');
+        const scrollY = window.scrollY;
+
+        bgElements.forEach(bg => {
+          bg.style.position = 'absolute';
+          bg.style.top = scrollY + 'px';
+          bg.style.left = '0';
+          bg.style.width = '100%';
+          bg.style.height = '100vh';
+          bg.style.pointerEvents = 'none';
+          bg.style.zIndex = '-1';
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        fixToViewport();
+        window.addEventListener('scroll', fixToViewport);
+        window.addEventListener('resize', fixToViewport);
+      });
+  </script>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
