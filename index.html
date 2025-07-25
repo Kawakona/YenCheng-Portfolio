@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial Design Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0 !important;
+      color: #ffffff;
+      overflow-x: hidden;
+      /*background-color: #ffffff;*/
+      background-image: url('/YenCheng-Portfolio/assets/Blurback-CftHEaZS.png');
+      background-attachment: fixed;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 20px 0;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 24px;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ccc;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    /* 漢堡按鈕樣式 */
+    .nav-toggle-label {
+      display: none;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* 隱藏 checkbox */
+    #nav-toggle {
+      display: none;
+    }
+
+    /* 手機模式 */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        right: 20px; /* 靠右對齊 */
+        top: 60px;   /* 展開在下方 */
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px 50px;
+        border-radius: 8px;
+        align-items: flex-start; /* 讓選單內容靠右 */
+        text-align: right;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+
+      .nav-toggle-label {
+        display: block;
+      }
+
+      /* 勾選 checkbox 時展開選單 */
+      #nav-toggle:checked ~ .nav-links {
+        display: flex;
+      }
+    }
+
+    @media (hover: none) {
+      .project-card.active .project-content h3,
+      .project-card.active .project-content small,
+      .project-card.active .project-content p,
+      .project-card.active .project-content .btn {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*background*/
+    
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/YenCheng-Portfolio/assets/BlurFront-BJ6xpSlk.png');
+      background-size: 100% auto;
+      background-position: top;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .hero-bg {
+      transform: scaleX(1);
+    } 
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      color: #ffffff;
+      font-size: 4rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: #ffffffdd;
+      font-size: 1rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: rgba(126, 126, 126, 0.2);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(222, 222, 222, 0.4);
+    }
+
+    .btn:hover {
+      background-color: rgba(203, 203, 203, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Projects Section */
+    .projects {
+      min-height: 100vh;
+      position: relative;
+      padding: 100px 0;
+      display: block;
+      overflow: hidden;
+    }
+
+    .projects-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/YenCheng-Portfolio/assets/BlurFrontR-B2mGbbi7.png');
+      background-size: 100% auto;
+      background-position: top;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .projects-bg {
+      transform: scaleX(1);
+    } 
+
+    .projects::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      text-align: left;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .project-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 350px;
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.1);
+    }
+
+    .project-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+    }
+
+    .project-card:hover .project-content {
+      transform: translateY(0);
+    }
+
+    .project-content h3 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.1s;
+    }
+
+    .project-content small {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      font-weight: normal;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.1s;
+    }
+
+    .project-content p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.2s;
+      text-align: justify;
+    }
+
+    .project-content .btn {
+      align-self: flex-start;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.3s;
+    }
+
+    .project-card:hover .project-content h3,
+    .project-card.active .project-content h3,
+    .project-card:hover .project-content small,
+    .project-card.active .project-content small,
+    .project-card:hover .project-content p,
+    .project-card.active .project-content p,
+    .project-card:hover .project-content .btn,
+    .project-card.active .project-content .btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Project Detail Page */
+    .project-detail {
+      min-height: 100vh;
+      padding: 120px 0 80px;
+      position: relative;
+      display: block;
+      overflow: hidden;
+    }
+
+    .project-detail-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/YenCheng-Portfolio/assets/BlurFrontY-6B_U7Rfm.png');
+      background-size: 100% auto;
+      background-position: top;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .project-detail-bg{
+      transform: scaleX(1);
+    } 
+
+    .project-detail::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0);
+      z-index: 1;
+      pointer-events: none;
+      z-index: 0;     
+    }
+
+    .project-detail-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .project-detail-header {
+      margin-bottom: 40px;
+    }
+
+    .project-detail-header h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .project-detail-header p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 700px;
+      text-align: justify;
+    }
+
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0px;
+      margin-bottom: 40px;
+    }
+
+    .gallery-img {
+      flex: 1 1 calc(50% - 10px); /* 每行2張圖，含gap留白，根據需要調整 */
+      aspect-ratio: 16 / 9;       /* 或 4 / 3 或 1 / 1，看你想要什麼比例 */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .project-description {
+      margin-bottom: 40px;
+    }
+
+    .project-description h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .project-description p {
+      line-height: 1.7;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .project-description-bar {
+      background-color: rgba(111, 111, 111, 0.7);
+      padding: 0px 16px;
+      border-radius: 30px;
+      
+    }
+
+    .content-wrapper {
+      display: flex;           /* 啟用 flex 排版 */
+      align-items: top;     /* 垂直置中對齊 */
+      gap: 0px;  
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: left;
+      margin-bottom: 30px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      transform: translateX(-5px);
+    }
+
+    .back-button span {
+      margin-left: 8px;
+    }
+
+    /* About Section */
+    .about {
+      min-height: 100vh;
+      padding: 100px 0;
+      position: relative;
+      display: block;
+      overflow: hidden;
+    }
+
+    .about-bg {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/YenCheng-Portfolio/assets/BlurFrontG-DhJUXjEm.png');
+      background-size: 100% auto;
+      background-position: center 0px;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .about-bg {
+      transform: scaleX(1);
+    } 
+
+    .about::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      z-index: 0;
+    }
+
+    .about-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .about-img {
+      /*flex: 1;*/
+      height: 250px;
+      width: 250px;
+      background-image: url('/YenCheng-Portfolio/assets/123-black-C0IOFkuj.jpg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 125px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-img:hover{
+      height: 250px;
+      width: 250px;
+      background-image: url('/YenCheng-Portfolio/assets/123-261-D2XMv-F8.jpg');
+      transition: all 0.3s ease;
+    }
+
+    .about-content {
+      flex: 1;
+    }
+
+    .about-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .about-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    .about-content p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      gap: 10px;
+    }
+
+    .skill {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 100px 0;
+      position: relative;
+      min-height: 100vh;
+      display: block;
+      overflow: hidden;
+    }
+
+    .contact-bg {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/YenCheng-Portfolio/assets/BlurFrontO-BgxSwphn.png');
+      background-size: 100% auto;
+      background-position: center 0px;
+      background-attachment: fixed;
+      z-index: -1;
+      transform: scaleX(4);
+      transition: transform 2s ease;
+      will-change: transform;
+    }
+
+    section.section.active .contact-bg {
+      transform: scaleX(1);
+    } 
+
+    .contact::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+      z-index: 0;
+    }
+
+    .contact-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 60px;
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .contact-info h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    .contact-info p {
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    .contact-details {
+      margin-bottom: 30px;
+    }
+
+    .contact-details div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .contact-details i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+    }
+
+    .contact-icons {
+      margin-right: 15px;
+      width: 1.2rem;
+      height: 1.2rem;
+      vertical-align: text-bottom;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 0px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: 100%;
+      /*background-color: rgba(255, 255, 255, 0.1);*/
+      /*border-radius: 50%;*/
+      color: #fff;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      /*border: 1px solid rgba(255, 255, 255, 0.2);*/
+      opacity: 0.6;
+      filter: brightness(100) saturate(0);
+      aspect-ratio: 1.2 / 1;
+    }
+
+    .social-icons a:hover {
+      /*background-color: rgba(255, 255, 255, 0.2);*/
+      transform: translateY(-5px);
+      opacity: 0.8;
+      
+    }
+
+    .contact-form {
+      flex: 1;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #fff;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #fff;
+    }
+
+    .form-group textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    footer p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    /* Responsive Styles */
+    @media (min-width: 993px) {
+      .about-img {
+        position: relative; top: -150px; left: -50px; 
+      }
+    }
+
+    @media (max-width: 992px) {
+      .about-container, .contact-container, .content-wrapper {
+        flex-direction: column;
+      }
+
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .project-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-bg, .projects-bg, .project-detail-bg, .about-bg, .contact-bg {
+        background-size: 180%;
+
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Hide all sections initially except home */
+    .section {
+      display: none;
+    }
+
+    #home-section {
+      display: block;
+    }
+
+    /* 影片 */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 比例 */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 顯示 */
+    .section {
+     opacity: 0;
+     transform: translateX(0px);
+     transition: opacity 01s ease, transform 0s ease;
+     pointer-events: none;
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     max-width: 100vw;
+     box-sizing: border-box
+    }
+
+    /* 顯示中狀態 */
+    .section.active {
+     opacity: 1;
+     transform: translateX(0);
+     pointer-events: auto;
+      position: relative;
+    }
+
+  </style>
+  <script type="module" crossorigin src="/YenCheng-Portfolio/assets/index-zAznpRn2.js"></script>
+  <link rel="stylesheet" crossorigin href="/YenCheng-Portfolio/assets/index-CZjapswf.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo" id="home-link">Yen-Cheng Chou</a>
+
+      <!-- 漢堡選單控制 -->
+      <input type="checkbox" id="nav-toggle" />
+      <label for="nav-toggle" class="nav-toggle-label">☰</label>
+
+      <!-- 導覽選單 -->
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link" data-section="home-section">Home</a></li>
+        <li><a href="#" class="nav-link" data-section="projects-section">Projects</a></li>
+        <li><a href="#" class="nav-link" data-section="about-section">About</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Home Section (Hero) -->
+  <section id="home-section" class="section active">
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1>Portfolio -2024</h1>
+        <p>紀錄含2024年以前在校時期的其中5件作品，雖不喜歡隨意定義自己的設計傾向，但這幾項作品中顯示我傾向功能性的設計，並多以生活體驗為出發點，探索日常生活中的小細節與使用者需求。<br>
+        <br>
+          嘗試以 AI 氛圍編程 ( Vibe Coding ) 輔助設計網頁作品集，本網頁結合three. js互動模型展示、影片嵌入、以及響應式設計，邊做邊學，享受多元學習過程。希望各位老闆喜歡 !</p>
+        <a href="#" class="btn nav-link" data-section="projects-section">View Projects</a>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects-section" class="section active" >
+    <div class="projects">
+      <div class="projects-bg"></div>
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Projects</h2>
+        </div>
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card" data-project="project1">
+            <div class="project-img" style="background-image: url('/YenCheng-Portfolio/assets/sidegohead-BvUpZ-vd.png')"></div>
+            <div class="project-content">
+              <h3>SideGo<small>  Scooter Sidecar Trolley</small></h3>
+              <p>跨界速克達邊車</p>
+              <a href="#" class="btn view-project" data-project="project1">View Project</a>
+            </div>
+          </div>
+          
+          <!-- Project 2 -->
+          <div class="project-card" data-project="project2">
+            <div class="project-img" style="background-image: url('/YenCheng-Portfolio/assets/tb4-7q9f-cDN.png')"></div>
+            <div class="project-content">
+              <h3>TURN BEAUTY<small>  全自動化妝機</small></h3>
+              <p>AIoT與次世代化妝解決方案</p>
+              <a href="#" class="btn view-project" data-project="project2">View Project</a>
+            </div>
+          </div>
+          
+          <!-- Project 3 -->
+          <div class="project-card" data-project="project3">
+            <div class="project-img" style="background-image: url('/YenCheng-Portfolio/assets/Cashhead-B9wTVjiU.png')"></div>
+            <div class="project-content">
+              <h3>機動找錢包<small>  外送員專用防水錢包</small></h3>
+              <p>為戶外高頻率現金交易情境打造的快速找零工具</p>
+              <a href="#" class="btn view-project" data-project="project3">View Project</a>
+            </div>
+          </div>
+          
+          <!-- Project 4 -->
+          <div class="project-card" data-project="project4">
+            <div class="project-img" style="background-image: url('/YenCheng-Portfolio/assets/NChand-BT8fwnid.png')"></div>
+            <div class="project-content">
+              <h3>Casual Tools<small>  Nail Claner</small></h3>
+              <p>複合機能指甲剪｜修整 x 清潔</p>
+              <a href="#" class="btn view-project" data-project="project4">View Project</a>
+            </div>
+          </div>          
+
+          <!-- Project 5 -->
+           <div class="project-card" data-project="project5">
+            <div class="project-img" style="background-image: url('/YenCheng-Portfolio/assets/MEHU2-DLmm78KI.png')"></div>
+            <div class="project-content">
+              <h3>Monkey & Elephant<small>  戶外個人野餐桌</small></h3>
+              <p>家具概念設計專案</p>
+              <a href="#" class="btn view-project" data-project="project5">View Project</a>
+            </div>
+          </div>   
+          <!--
+          
+           <div class="project-card" data-project="project6">
+            <div class="project-img" style="background-color: #000; display: flex; justify-content: center; align-items: center;"><h3 style="font-size: 5rem; margin: 50px; text-align: center; justify-content: center; font-family: DotGothic16, sans-serif; transform: translateY(-10px);">About.</h3></div>
+            <div class="project-content">
+              <h3>Monkey & Elephant<small>  戶外個人野餐桌</small></h3>
+              <p>家具概念設計專案</p>
+              <a href="#" class="btn view-project" data-project="project6">View Project</a>
+            </div>
+          </div>    6 -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Detail Pages -->
+      <!-- P1 -->   
+  <section id="project1-detail" class="section project-detail active">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        
+        <h2>SideGo 跨界速克達邊車</h2>
+        <p>Scooter Sidecar Trolley // 2024畢業製作</p>
+      </div>
+      <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SChead-6ilWThrJ.png'); flex:1; aspect-ratio: 2843 / 1040;"></div>
+
+      <h3><br></h3>
+    <div class="project-gallery">
+
+      
+      <div class="project-description">
+        <h3>01｜設計背景</h3>
+        <p>在速克達機車盛行的國家（如台灣等東南亞國家），使用速克達機車載運貨物是非常常見的行為。但在搬運體積龐大或重物時，我們常常在上下貨的過程中遇到困難。不僅因為載物空間有限而使人麻煩，
+          如果機車無法停靠在目的地附近，使用者也常常需要徒手搬運貨物才能上卸貨物。就算目的地備有推車，在取用的過程中也相當麻煩。另外一方面，如果是經常需要使用機車搬運的族群如外送員、餐廳備
+          料，轉換載具間的段差也會成為一種負擔。</p>
+        <div style="background-color: rgb(0, 0, 0); padding: 20px">
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCpepo-jYt2Mo2z.png'); flex:1; aspect-ratio: 1053 / 320;"></div>
+        </div>
+        <p></p>
+
+        <h3>02｜族群調查</h3>
+        
+        <p>實地造訪米糕店、生魚片攤、米行與外送員等經常仰賴機車載物的族群：</p>
+        
+        <div class="content-wrapper" style="gap: 10px;">
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>01｜米糕店</h2><p>需求為每日中午一次日常備料<br>備料內容為小菜用的食材，單趟運載量為45~60KG<br>載具為自用150cc速克達、推車</p></div>
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>02｜生魚片攤</h2><p>需求為每日清晨一次日常備料<br>備料內容為生魚片、海鮮等食材，單趟運載量為40~100KG<br>載具為自用150cc速克達、徒手搬運</p></div>
+        </div>
+
+        <div class="content-wrapper" style="gap: 10px; margin-top: 10px;">
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>03｜米行</h2><p>需求為每日二~十次日常送貨<br>送貨內容為商家訂購的米，單趟運載量為20~80KG以上<br>載具為自用125cc檔車、徒手搬運</p></div>
+          <div style="min-width: 50%; padding: 20px; background-color: rgba(200, 200, 200, 0.3);color: #ffffff; border-radius: 10px; border-style:solid;">
+            <h2>04｜外送員</h2><p>多載外送箱，可載運大單<br>載不同家外送箱，可增加接單頻率<br>偶需進室內，甚至送上樓、進電梯</p></div>
+        </div>
+        <p></p>
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCwork-4uUwtp6g.png'); flex:1; aspect-ratio: 2353 / 491;"></div>  <p></p>
+        
+        <h3>03｜洞察</h3>
+
+        <p>觀察到：運輸的行為不只侷限在馬路上，而常延伸至巷弄、騎樓、甚至攤位後方的備料區。這些非道路空間往往無法直接以機車抵達，使得從機車到目的地之間的「最後幾步」成為最具挑戰的搬運環節。<br>
+           此外，我們注意到即便部分使用者會備有推車輔助，「推車」往往被視為額外的裝備，而非機車運輸流程的一部分。這導致了實際使用上的猶豫與斷裂，像是需來回取用、推車收納不便等情況，反而降低了整體運輸效率。</p>
+        <div class="content-wrapper">
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCcomic1-DLH21r2V.png'); flex:1; aspect-ratio: 774 / 268;"></div>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCcomic2-HdKWrlYy.png'); flex:1; aspect-ratio: 774 / 268;"></div>
+        </div>
+        <p></p>
+        <h3>04｜SideGo</h3>
+        <p>SideGo是一款可拆卸變形為手推車的速克達邊車，致力於為機車載貨情境提供更好的整合服務，以應對不同情境需求。
+          透過SideGo的銜接裝置，使用者可以輕鬆將SideGo從速克達上拆卸下來，並透過簡單的步驟便能將其從載物邊車轉換為載貨推車。
+          彌補了機車載物情境中無法延伸到的地方。</p>
+
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCtitle-CDIDUd3e.png'); flex: 1; aspect-ratio: 192 / 106; position: relative;">
+          <!-- 左側：邊車模式 -->
+          <b style="position: absolute; left: 10%; top: max(10px, calc(30% - 2.8rem - 16px)); width: 40%;">
+            <span style="display: inline-block; background-color: rgba(0,0,0,0.3); color: white; padding: 8px 16px; border-radius: 10px; line-height: 1.4; font-size: clamp(12px, 2vw, 18px);">
+              邊車<br>模式</span>
+          </b>
+          <!-- 右側：推車模式 -->
+          <b style="position: absolute; left: 50%; top: max(10px, calc(30% - 2.8rem - 16px)); width: 40%;">
+            <span style="display: inline-block; background-color: rgba(0,0,0,0.3); color: white; padding: 8px 16px; border-radius: 10px; line-height: 1.4; font-size: clamp(12px, 2vw, 18px);">
+              推車<br>模式</span>
+          </b>
+        </div>
+
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCshot-DrgYn1E3.png'); flex:1; aspect-ratio: 1881 / 3380;"></div>
+        
+        
+
+        <div style="background-color: rgba(255, 255, 255, 1); padding: 20px 0px 20px 10px; color: #373737; "><b style="font-size: 1.5rem;">｜使用情境</b>
+          <p style="margin: 0 30px 10px 20px;">SideGo能透過型態變化去適應兩種狀態,分別是邊車模式與推車模式。<br>
+          邊車模式是透過銜接器去銜接變形推車,當推車於前輪抬起的邊車狀態時能提供大尺寸、大重量的車道運輸功能,使載重時能維持舒適的騎乘姿勢與駕駛靈活度。而當變形推車
+          提起把手,前輪下放觸地時,可與銜接器分離,成為推車狀態,進一步輔助所載重物前往到非車道地區,如巷弄、電梯、人行道、室內等…</p></div>
+        <div>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCsec1-Bm6y7hBm.png'); flex:1; aspect-ratio: 2385 / 1077;"></div>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCsec2-ds0cB_nO.png'); flex:1; aspect-ratio: 2385 / 1077;"></div>
+        </div>
+        
+
+        <div style="background-color: rgba(255, 255, 255, 1); padding: 20px 0px 20px 10px;"><b style="color: #373737; font-size: 1.5rem;">｜操作介紹</b></div>
+
+        <div style="background-color: rgba(255, 255, 255, 1);">
+          <div style="position: relative; width: 100%; aspect-ratio: 2155 / 788; display: flex; flex-wrap: wrap; gap: 10px;">
+              <!-- 上排 3 張 -->
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('/YenCheng-Portfolio/assets/SC1_2-C4WjUnX-.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">邊車</p>
+              </div>
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('/YenCheng-Portfolio/assets/SC2_2-D8atzoAc.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">抽出手把</p>
+              </div>
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('/YenCheng-Portfolio/assets/SC3_2-CAzv1JD9.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">提起手把</p>
+              </div>
+
+              <!-- 下排 2 張：第4個加 margin-left 讓置中 -->
+              <div style="width: calc(33.333% - 7px); margin-left: calc(16.666% + 5px);">
+                <div style="background-image: url('/YenCheng-Portfolio/assets/SC4_2-B-spZwHA.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">解開插銷</p>
+              </div>
+              <div style="width: calc(33.333% - 7px);">
+                <div style="background-image: url('/YenCheng-Portfolio/assets/SC5_2-qvPfpF6t.png'); aspect-ratio: 416 / 350; background-size: contain; background-repeat: no-repeat; width: 100%; background-color: rgb(255, 255, 255); border-radius: 0px;"></div>
+                <p style="text-align: center; color: #4f4f4f; font-weight: bold;">推車</p>
+              </div>
+          </div>
+        </div>
+        <p></p>
+
+        <h3>05｜適配性設計</h3>
+        <p>SideGo的銜接裝置除了提供了順暢且方便的銜接系統外，也嘗試以更方便且契合人心的安裝設計。為了適配於速克達機車上，設置上使用大多數速克達所具有的前腳踏板和後搖臂上的安裝點，提供了一個不具破壞性的改裝方案。此外因為需要適配不同的速克達車型，銜接裝置設計以多方位適配機制，解決各種情況下出現的鎖點位置差異。<br>
+        銜接裝置的段差回饋與轉軸回饋，可以應對機車立中柱時所產生的角度差與斷差。
+        </p>
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCad1-DLCbP_t2.png'); aspect-ratio: 1395 / 654;"></div>
+        <div class="content-wrapper" style="background-color: rgba(255, 255, 255, 1);">
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCad2-Qdi54uKk.png'); flex:1; aspect-ratio: 787 / 473; margin-top: 10px;"></div>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCad4-DOmw5VMc.png'); flex: 1; aspect-ratio: 849 / 489; background-size: contain;"></div>
+        </div>
+
+        <p></p>
+        <div style="background-color: rgba(0, 0, 0, 0.4); padding: 40px 10px; border-radius: 10px;">
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCad31-DmqhAxte.png'); flex: 2; aspect-ratio: 1025 / 425; background-size: contain; position: relative;">
+            <p style=" position: absolute; bottom: 22.5%; left: 3.8%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              滑軌</p>
+            <p style=" position: absolute; bottom: 59%; left: 5.8%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              後固定點</p>
+            <p style=" position: absolute; bottom: 78.2%; left: 17.3%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              插銷</p>
+            <p style=" position: absolute; bottom: 70%; left: 34%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              高度適配</p>
+            <p style=" position: absolute; bottom: 1.5%; left: 32.4%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              轉軸回饋</p>
+            <p style=" position: absolute; bottom: 16.5%; left: 37.5%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              段差回饋</p>
+            <p style=" position: absolute; bottom: 33.4%; left: 48.5%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              長度適配</p>
+            <p style=" position: absolute; bottom: 84%; left: 49%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              後鎖點</p>
+            <p style=" position: absolute; bottom: 62.6%; left: 62.4%; transform: translate(-50%, 50%); display: flex; justify-content: center; align-items: center; width: max-content; max-width: 100%; text-align: center; margin: 0; font-size: clamp(12px, 1.2vw, 18px); background: rgba(0, 0, 0, 0.3); border-radius: 20px; padding: 0em 0.3em;">
+              前鎖點</p>
+          </div>
+        </div>
+        
+        <p></p>
+        <h3>06｜載物能力</h3>
+        <p>SideGo常規下有52*100平方公分的載物平面。<br>
+          載物平面四周設有可調整護欄，除了提供可以使用綁帶的機能結構外，也可以依照需求調整護欄
+          角度以容納超過載物平面的貨物</p>
+        <div style="position: relative; display: flex; flex-wrap: wrap; gap: 10px;">
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCcap1-CPzMp3Mg.png'); flex:1; aspect-ratio: 442 / 411;"></div>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/SCcap2-xVFlPQva.png'); flex:1; aspect-ratio: 442 / 411;"></div>
+        </div>
+        <p></p>
+
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/HFUrP6WN1n8?si=FryYd29-ro-U1CzU" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe></div>
+      </div>
+
+      <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+        <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+          
+          <!-- 左側文字區塊 -->
+          <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 300px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 30px;">｜新一代設計展</h3>
+            
+              <p>設計團隊：</p>
+              <p><br></p>
+              <p>周言丞｜</p>
+              <p><br></p>
+              <p>詹秉翰｜</p>
+            
+            <div style="position: absolute; bottom: 20px;">
+              <p>Design in 2024</p>
+            </div>
+          </div>
+
+          <!-- 右側圖片區塊（RWD 可擴充） -->
+          <div style="
+            flex: 1.5;
+            margin: 20px;
+            max-width: 1000px;
+            min-width: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          ">
+            <img 
+              src="/YenCheng-Portfolio/assets/SCnewd-BKcjTazg.png" 
+              style="
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                display: block;
+                max-width: 100%;
+              "
+            >
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+    </div>
+  </section>
+
+      <!-- P2 -->
+  <section id="project2-detail" class="section project-detail active">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        <h2>TURN BEAUTY 全自動化妝機</h2>
+        <p>AIoT與次世代化妝解決方案</p>
+      </div>
+      
+      <div class="project-gallery">
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/TBcov-C8YuvmDA.png'); flex:1; aspect-ratio: 2843 / 1040;"></div>
+        
+      <div class="project-description">
+        <br>
+        <h3>01｜設計理念</h3>
+           <p>傳統化妝行為對手部身障者而言是一項極具挑戰的任務，日常的自我照顧因此變得高度依賴他人。本專案初期聚焦於手部障礙者的日常需求，透過使用者訪談與實際情境模擬，
+            發現「化妝」不僅是美觀的追求，更承載著自我認同與社交參與的意義。因此，我們希望透過設計，回應「自主美的權利」這個核心價值
+            。
+           </p>
+           <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/TB01-BIMrNFUM.png'); flex: 1 1 20%; aspect-ratio: 1920 / 692;"></div>
+           <br>
+
+        <h3>02｜TURN BEAUTY</h3>
+           <p>TURN BEAUTY 起始於對手部障礙者化妝困境的關注，並延伸出一套可廣泛適用的自動化妝解法。，透過臉部掃描、AI 辨識與機構控制三項技術整合，讓化妝變得更直覺、輕鬆，成為每個人都能擁有變好看的契機。</p>
+           <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/TB02-CvLaqoA6.png'); flex: 1 1 20%; aspect-ratio: 2120 / 1080;"></div></p>
+        
+        <h3>03｜系統構成與互動流程</h3>
+        <p>TURN BEAUTY 採用人機互動介面與精密機構整合設計，使用者可透過螢幕操作或語音控制完成妝容選擇。系統結合 AR 技術即時模擬妝容，協助使用者確認風格與色調後進入施作階段。
+          此時，螢幕翻轉開啟，露出內建化妝機構——一個貼合人臉輪廓的半球型凹槽，搭載可旋轉與伸縮的多功能噴槍。</p>
+        <p>噴槍具備角度調節、噴嘴切換與出力微調能力，並配合紅外線追蹤裝置，即時偵測使用者位置，自動校正上妝動作，確保每一步都穩定精確。整體系統整合感測、演算與執行單元，
+          實現化妝流程的全自動化與高容錯率。</p>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/TBMech-B6Er1zBP.png'); aspect-ratio: 2923 / 985;"></div></p>
+
+             <div style="flex:1; background-color: rgba(0, 0, 0, 0.3); border-radius:10px;">
+              <!-- 第一層 -->
+            <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px;">
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>1｜支援語音指令</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('/YenCheng-Portfolio/assets/TB002-Dw4ji5NR.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">身障、手部不方便者能安心使用</span></div>
+              </div>
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>2｜AR模擬上妝</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('/YenCheng-Portfolio/assets/TB003-D6EPMD8F.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">及時模擬上妝效果</span></div>
+              </div>
+            </div>
+
+            <!-- 第二層 -->
+            <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px;">
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>3｜精密全自動噴槍、掃瞄系統</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('/YenCheng-Portfolio/assets/TB001-sCKGIrnD.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                <div class="skills" style="margin-bottom: 20px;">
+                  <span class="project-description-bar">紅外線立體掃描</span>
+                  <span class="project-description-bar">防呆影像辨識、監控</span>
+                  <span class="project-description-bar">底妝、眼妝、眉毛，三種專用噴頭</span>
+                  <span class="project-description-bar">自動調控妝品成分</span>
+                  <span class="project-description-bar">全方位零死角噴塗</span>
+                  <span class="project-description-bar">兩側同時作動，高效上妝</span></div>
+              </div>
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>4｜一次性抿式唇膏</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('/YenCheng-Portfolio/assets/TB004-BlpwRxb2.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">自動調整高度、距離</span>
+                    <span class="project-description-bar">自動調控唇膏成分、形狀</span>
+                    <span class="project-description-bar">一次性抿唇紙</span>
+                    <span class="project-description-bar">抿式唇膏方便、光澤漂亮</span>
+                    <span class="project-description-bar">兼顧衛生</span></div>
+              </div>
+            </div>
+
+            <!-- 第三層 -->
+            <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px;">
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>5｜下側抽風口</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('/YenCheng-Portfolio/assets/TB005-Do6NqaGI.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                <div class="skills" style="margin-bottom: 20px;">
+                  <span class="project-description-bar">防止粉塵停留，吸入鼻腔、肺部</span></div>
+              </div>
+              <div style="flex:1; padding: 20px 20px 0px 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+                <h2>6｜語音提示</h2>
+                  <div class="gallery-img" style=" 
+                    aspect-ratio: 272 / 204; margin: 10px 0px -20px 0px;
+                    background-image:url('/YenCheng-Portfolio/assets/TB006-Ckpn0qSf.png'); 
+                    background-size:contain; background-repeat: no-repeat; background-position: center;align-items: center;
+                    max-width: 500px;
+                    min-width: 0; 
+                    ">
+                  </div>
+                  <div class="skills" style="margin-bottom: 20px;">
+                    <span class="project-description-bar">於噴塗時提供相關提示</span></div>
+              </div>
+            </div></div>
+
+        <h3>04｜流程</h3></p>
+        <p>AR試妝介面</p></p>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/TBUI-WzmSqeea.png'); aspect-ratio: 1103 / 272; position: relative;">
+          </div><h3> <br></h3>
+
+        <p>操作流程</p></p>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/TBtre-DdTjIS9i.png'); aspect-ratio: 1073 / 272; position: relative;">
+          </div><h3> <br></h3>
+
+        <h3>05｜未來應用與社會影響</h3>
+        <p>TURN BEAUTY 不僅是為身障者設計的輔助工具，更是一種全新的美妝體驗提案。未來它可廣泛部署於便利商店、百貨商場、交通樞紐等公共場域，提供即時且標準化的化妝服務，
+          讓臨時有妝容需求的使用者快速應對重要場合。透過數據學習與雲端優化，系統將持續提升妝容選擇與精準度，逐步演進為個人化美容顧問平台。TURN BEAUTY 不只是解決問題的產品，
+          更試圖開啟一場化妝文化的革新——讓「自動化妝」成為潮流，讓每個人都想體驗一次未來化妝的新可能。</p>
+
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/0dmIfGGDAdU?si=7QfHL9o6bxnx1cUC" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe></div>
+          </p>
+        <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+          <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+            
+            <!-- 左側文字區塊 -->
+            <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 350px;">
+              <h3>｜實作與設計團隊</h3>
+              
+                <p>設計團隊：</p>
+                
+                <p>張岱玲｜訪談、設計、UI、平面</p>
+                
+                <p>董清茂｜訪談、模型製作</p>
+                
+                <p>周言丞｜設計、機構設計、系統整合、建模、渲染、3D列印、剪輯</p>
+              
+              <div style="position: absolute; bottom: 0px;">
+                <p>Design in 2023</p>
+              </div>
+            </div>
+
+            <!-- 右側圖片區塊（RWD 可擴充） -->
+            <div style="
+              flex: 1.2;
+              margin: 20px;
+              max-width: 1000px;
+              min-width: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <img 
+                src="/YenCheng-Portfolio/assets/TBFa-IulA5kI3.jpg" 
+                style="
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  display: block;
+                  max-width: 100%;
+                "
+              >
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+        <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      </div>
+  </section>
+
+      <!-- P3 -->
+  <section id="project3-detail" class="section project-detail active">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        <h2>機動找錢包｜外送員專用防水錢包</h2>
+        <p>為戶外高頻率現金交易情境打造的快速找零工具</p>
+      </div>
+      <div class="project-gallery">
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/CASHston-6wbeucJ1.png'); flex:1; aspect-ratio: 2843 / 1040;"></div>
+        <br>
+      <div class="project-description">
+        <h3>01｜設計背景</h3>
+           <p>外送服務中仍有不少使用現金交易的情況，外送員在處理找零時，常面臨效率與收納的雙重困擾。實際觀察中可見，多數外送員會使用防水袋分裝紙鈔與硬幣，或直接使用一般皮夾。然而這些方式在工作場域內的使用不夠直覺，特別在下雨、光源不足或需要單手操作的情境中，常導致動作遲緩、找錯金額。<br>
+           因此本設計目標為提供一款能快速取用硬幣、分類清楚且具防水性的專用錢包，讓找零成為一個流暢的動作，而不是一項多餘的負擔。</p>
+           <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/CASHmoney-B0IIQqJJ.png'); flex: 1 1 20%; aspect-ratio: 1280 / 417;"></div>
+          <br>
+
+        <h3>02｜設計理念</h3>
+           <p>參考彈簧式找零盒中可一一撥出硬幣的模組。收納方式則取材自工人腰包的可翻捲設計，讓整體體積在收納時更緊湊，使用時能一翻即開。<br>
+              內部設有紙鈔收納空間，硬幣與紙鈔分區明確，便於整理與使用。整體設計偏向外掛型態，可輕鬆繫在腰部，使用上更靈活。</p>
+            <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/CASHconcept-BDpMudVS.png'); flex: 1 1 20%; aspect-ratio: 2824 / 760;"></div>
+            <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/CASHall-BfPkVwy8.png'); flex: 1 1 20%; aspect-ratio: 3568 / 1821; margin-top: 0px;"></div>
+            <div style="display: flex; gap: 0px; flex-wrap: wrap; margin-top: 10px;">
+              <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/CASHcoin-C5XXUi3y.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1080; background-color: #ffffff;"></div>
+              <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/CASHmon-DQUhPuCN.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1080; background-color: #ffffff;"></div>
+              <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/CASHback-DrP2jbUa.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1080; background-color: #ffffff;"></div>
+            </div>
+            <div style="display: flex; gap: 0px; flex-wrap: wrap; margin-top: 10px;">
+              <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/Cashhead3-Cf57XUsi.png'); flex: 1 1 20%; aspect-ratio: 1 / 1;"></div>
+              <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/Cashhead2-DbXEqnw1.png'); flex: 1 1 20%; aspect-ratio: 1 / 1;"></div>
+            </div>
+           <p></p>
+
+            <div class="video-container"><iframe src="https://www.youtube.com/embed/1GJ9jggI-t4?si=Y-alohpjOG3cxQ9-" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe></div>
+            <p></p>
+           
+        <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+          <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+            <!-- 左側文字區塊 -->
+            <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 250px;">
+              <h3>｜實作</h3>
+              
+                <p>實際操作中，可快速展開錢包、撥出硬幣並順利取出紙鈔，找零流程順暢，操作後再迅速收捲固定，符合戶外工作者的使用節奏與習慣。</p>
+              
+              <div style="position: absolute; bottom: 0px;">
+                <p>Design in 2022</p>
+              </div>
+            </div>
+
+            <!-- 右側圖片區塊（RWD 可擴充） -->
+            <div style="
+              flex: 1;
+              margin: 20px;
+              max-width: 1000px;
+              min-width: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <img 
+                src="/YenCheng-Portfolio/assets/CASHproto-Diez7enD.png" 
+                style="
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  display: block;
+                  max-width: 100%;
+                "
+              >
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+        <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      </div>
+  </section>
+
+      <!-- P4 -->
+  <section id="project4-detail" class="section active">
+    <div class="project-detail">
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      <div class="project-detail-header">
+        <h2>Casual Tools 複合機能指甲剪</h2>
+        <p>｜修整 x 清潔</p>
+      </div>
+      <div class="project-gallery">
+        <div class="viewer-container" id="viewer-casualtools" style="width:100%; height: 400px; border-radius: 16px;; position:relative;"></div> 
+
+      </div>
+      <div class="project-description">
+        <h3>01｜設計理念</h3>
+           <p>觀察戶外活動者與工作型使用者的日常後，我們發現指甲清潔與修整常因工具分散、場地限制而被忽略。尤其指縫髒污與剪屑飛濺的問題，在移動或戶外情境中更難處理。這款指甲剪整合修剪、清潔、磨整三種功能，讓手部修整流程更完整、集中，提升清潔效率與操作整潔度。</p>
+           <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/NCtex-RpDlqPCF.png'); flex: 1 1 20%; aspect-ratio: 1920 / 1008;"></div>
+           <br>
+
+        <h3>02｜功能整合與外型構成</h3>
+           <p>產品外型採圓潤鵝卵石形，結合功能所需的結構比例，適合日常攜帶使用。主要機能設計如下：</p>
+           <p><span class="project-description-bar">剪刀機構</span>｜封閉式指甲鉗，可防止指甲屑外噴，卡扣設計亦可暫時存放指甲屑<br>
+           <span class="project-description-bar">清潔刷頭</span>｜另一側撥鍵推出短硬刷，強化指縫髒污清除效果<br>
+           <span class="project-description-bar">磨甲砂面</span>｜剪口兩側設有粗細雙面磨砂區，修剪後可直接整型甲緣<br>
+           <span class="project-description-bar">材質設定</span>｜外殼使用塑膠製成，具基本防潑水性，適應多種使用環境</p>
+           <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/NCD1-DzTnALlw.png'); flex: 1 1 20%; aspect-ratio: 48 / 19;"></div>
+           <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/NCinter-BmX_JAqV.png'); flex: 1 1 20%; aspect-ratio: 48 / 19;"></div></p>
+        
+        <h3>03｜使用情境與應用優勢</h3>
+        <p>產品適合從事戶外活動、手作、園藝工作的族群。透過集中整合的清潔與修整流程，使用者可在活動後快速完成指甲清潔，
+          避免因藏污導致不適或衛生疑慮。</p>
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/NCfoot-CSIAJLru.png'); aspect-ratio: 3 / 1.25;"></div>
+        <h3> <br></h3>
+
+        
+        <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+          <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+            <!-- 左側文字區塊 -->
+            <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 400px;">
+              <h3>｜實作</h3>
+              
+                <p>模型測試中搭配日常洗手流程使用，在製作油土模型之後設計師們常常沒辦法洗乾淨指甲縫隙，常備一具牙刷是個辦法但觀察後發現多數人並沒有意願為此攜帶一個專門清理手部的牙刷，但使用這個整合過的指甲剪就方便許多。刷毛硬度實測能有效清理頑固指縫污垢，搭配肥皂或洗手劑使用效果更加，驗證功能整合的實用性。</p>
+              
+              <div style="position: absolute; bottom: 0px;">
+                <p>Design in 2022</p>
+              </div>
+            </div>
+
+            <!-- 右側圖片區塊（RWD 可擴充） -->
+            <div style="
+              flex: 1;
+              margin: 20px;
+              max-width: 1000px;
+              min-width: 0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            ">
+              <img 
+                src="/YenCheng-Portfolio/assets/Proto-BbyhhajX.png" 
+                style="
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  display: block;
+                  max-width: 100%;
+                "
+              >
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+        <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+      </div>
+      </div>
+  </section>
+
+        <!-- P5 -->
+  <section id="project5-detail" class="section project-detail active">
+    
+    <div class="project-detail-bg"></div>
+    <div class="project-detail-container">
+      
+      <!-- 返回按鈕 -->
+      <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+
+      <!-- 頁首 -->
+      <div class="project-detail-header">
+        <h2>Monkey & Elephant 戶外個人野餐桌</h2>
+        <p>家具概念設計專案</p>
+      </div>
+
+      <!-- 首圖 -->
+      <div class="project-gallery">
+        <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/MEHU1-in1EuMIH.png'); flex: 1 1 20%; aspect-ratio: 3095 / 1080;"></div>
+      </div>
+
+      <!-- 內文段落 -->
+      <div class="project-description">
+        <h3>01｜設計背景</h3>
+        <p>
+          疫情後時代，人們的生活樣態產生改變，戶外活動與個人或小型娛樂成為新趨勢。<br>
+          Monkey & Elephant 以「個人野餐」為情境出發，思考能夠擺脫傳統桌子依賴地面擺放的限制，讓人可以在森林、草地、甚至斜坡上也能創造出一個舒適的、屬於自己的輕便休閒空間。
+        </p>
+
+        <h3>02｜設計理念：「靈活的猴子」與「可靠的大象」</h3>
+        <p>Monkey & Elephant 由兩個角色構成：</p>
+
+        <!-- 桌身與軟件內容區塊 -->
+        <div style="flex:1; background-color: rgba(0, 0, 0, 0.3); border-radius:10px;">
+          <div class="content-wrapper" style="gap: 10px; margin-bottom: 10px; display: flex; flex-wrap: wrap;">
+
+            <!-- Monkey 區塊 -->
+            <div style="flex:1; padding: 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+              <h2>桌身｜Monkey</h2>
+              <div class="gallery-img" style="
+                aspect-ratio: 272 / 204;
+                margin: 10px 0px -20px 0px;
+                background-image:url('/YenCheng-Portfolio/assets/MONR-CcD1pzF7.png');
+                background-size:contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                max-width: 500px;
+                min-width: 0;">
+              </div>
+              <p>
+                • 可透過束帶結構固定於樹幹或柱體<br>
+                • 桌面角度可調整，具備類似螺母鎖定的旋鈕設計，透過旋開旋鈕，可調前後仰與左右斜兩軸方向傾角<br>
+                • 束帶設計亦可轉化為背帶功能，方便攜帶<br>
+                • 安裝直觀快速，讓使用者能輕鬆在戶外建立屬於自己的桌面空間
+              </p>
+            </div>
+
+            <!-- Elephant 區塊 -->
+            <div style="flex:1; padding: 20px; background-color: rgba(0, 0, 0, 0); border-radius:10px;">
+              <h2>軟件｜Elephant</h2>
+              <div class="gallery-img" style="
+                aspect-ratio: 272 / 204;
+                margin: 10px 0px -20px 0px;
+                background-image:url('/YenCheng-Portfolio/assets/ELER-DnAOuHCJ.png');
+                background-size:contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                max-width: 500px;
+                min-width: 0;">
+              </div>
+              <p>
+                • 聚酯棉填充與EVA分層具有高穩定性與柔軟度<br>
+                • 可單獨作為地面沙發墊使用，增加戶外舒適性<br>
+                • 與 Monkey 組合時，成為下方支撐基座<br>
+                • 軟材能夠服貼地形、吸收傾斜，維持 Monkey 桌面水平<br>
+                •	防水材質<br><br><br>
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <h3 style="font-size: 1.8rem; margin-bottom: 20px;">03｜設計細節</h3>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/MEadd-DzjbghCg.png'); flex: 1; aspect-ratio: 2666 / 2163;"></div></p>
+          <div class="gallery-img" style="background-image: url('/YenCheng-Portfolio/assets/MEbook-DZIRq4xq.png'); flex: 1; aspect-ratio: 2230 / 550;"></div></p>
+
+
+        <!-- 使用情境區 -->
+        <h3 style="font-size: 1.8rem; margin-bottom: 20px; margin-top: 20px;">04｜使用情境</h3>
+        <p>
+          Monkey & Elephant是一套可以依據場地、需求與使用情境自由轉換的個人戶外生活工具組。它呈現三種核心使用型態：
+        </p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; max-width: 100%;">
+          <div style="flex: 1; max-width: 300px;">
+            <b style="font-size: 1.2rem;">① 側背攜行</b>
+            <div class="gallery-img" style="aspect-ratio: 496 / 786; background-image: url('/YenCheng-Portfolio/assets/me33-CITTbkLu.png'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 10px;"></div>
+          </div>
+          <div style="flex: 1; max-width: 300px;">
+            <b style="font-size: 1.2rem;">② 地上茶几</b>
+            <div class="gallery-img" style="aspect-ratio: 496 / 786; background-image: url('/YenCheng-Portfolio/assets/me22-DttdKf0h.png'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 10px;"></div>
+          </div>
+          <div style="flex: 1; max-width: 300px;">
+            <b style="font-size: 1.2rem;">③ 掛樹坐地</b>
+            <div class="gallery-img" style="aspect-ratio: 496 / 786; background-image: url('/YenCheng-Portfolio/assets/me11-BQM-5jWi.png'); background-size: cover; background-position: center; border-radius: 10px; margin-top: 10px;"></div>
+          </div>
+        </div><p></p>
+        <p><span class="project-description-bar">側背攜行</span><br>
+          Monkey 上的束帶不僅是固定結構，也可在收納後轉換為側背帶。重量輕巧，可單人背負移動，極適合短程徒步或野外漫遊。</p>
+        <p><span class="project-description-bar">地上茶几</span><br>
+          Monkey 與 Elephant 結合。Elephant 的軟材質讓整體可依地形變形貼合，使桌面仍保持穩定，讓使用者坐於地面或野餐墊旁使用桌面。</p>
+        <p><span class="project-description-bar">掛樹坐地</span><br>
+          Monkey 綁附在樹幹上作為懸掛式桌面，Elephant 放置於地面，使用者可坐在 Elephant 上進行野餐或休憩。Monkey 透過旋鈕結構調整角度，桌面能在各種樹幹與粗度條件下維持水平。</p>
+          
+
+        <!-- 影片區 -->
+        <div class="video-container" style="margin-top: 20px;">
+          <iframe src="https://www.youtube.com/embed/AmuzNCxY56k?si=_Pi9xOlPTu-f6nO_" frameborder="0" style="border-radius: 16px;" allowfullscreen></iframe>
+        </div><p></p>
+
+        <!-- 實作敘述區 -->
+          <div style="max-width: 100%; background-color: rgba(0,0,0,0.3); border-radius:8px;">
+            <div class="content-wrapper" style="display: flex; flex-wrap: wrap;">
+              <!-- 左側文字區塊 -->
+              <div style="flex:1; padding: 20px; min-width: 300px; position: relative; min-height: 400px;">
+                <h3>｜實作</h3>
+                
+                  <p>
+                    本專案以日本隈研吾 Kagu 設計競賽為目標進行開發，並同步結合校內的「原型設計課程」，完成了可實際使用的實體模型。<br>
+
+                    在實作階段，原先對於 Monkey 懸掛於樹上時的承重與穩定性有所疑慮，擔心角度鎖定機構會在使用中因重力或晃動而鬆脫。<br>
+
+                    但經實地測試與實際操作後，發現整體結構表現穩定、承重良好，Monkey 即使放置水瓶、餐盒等野餐物品，也能維持角度不滑動，達到原先設計預期。</p>
+                
+                <div style="position: absolute; bottom: 0px;">
+                  <p>Design in 2022</p>
+                </div>
+              </div>
+
+              <!-- 右側圖片區塊（RWD 可擴充） -->
+              <div style="
+                flex: 1;
+                margin: 20px;
+                max-width: 1000px;
+                min-width: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              ">
+                <img 
+                  src="/YenCheng-Portfolio/assets/MEproto-OGfgqmBY.png" 
+                  style="
+                    width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                    display: block;
+                    max-width: 100%;
+                  "
+                >
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+          <a href="#" class="back-button nav-link" data-section="projects-section">← Back to Projects</a>
+        </div>
+
+    </div>
+  </section>
+
+
+  <!-- About Section -->
+  <section id="about-section" class="section active">
+    <div class="about">
+      <div class="about-bg"></div>
+      <div class="container">
+        <div class="about-container">
+          <div class="about-img"></div>
+          <div class="about-content">
+            <h2>Hi</h2>
+            <p>我是周言丞，2024年畢業於雲林科技大學工業設計系。</p>
+            <p>大學四年熟悉sketch、建模、模製、展板平面設計等技能。</p>
+            <p>對建模有一定的熱誠，能夠使用Rhino、Blender、Cero(Pro E)、Solid Works、Keyshot、SketchUp、Alias。協助畢業籌備委員會主視覺主要建模。<br>
+              目前精熟Rhino曲面建模與Blender meshing，習慣使用Blender材質/場景渲染與3D動畫製作、素材製作與引用、插件使用等協力工具。<br>
+              也正在努力精通Solid Works。</p>
+              <p>平面設計，能夠使用Adobe illustrator、Photoshop。<br>
+              另外，能使用Adobe Premiere Pro剪輯軟體。能負責製作產品形象與解說影片。</p>
+              <p>實際模製，熟悉木工機具操作、PU/EK模製、3D列印操作（FDM、SLA）、紙模型建制/輸出與製作、模型噴漆與實習時操作過靜電烤漆。</p>
+              <p>包含這次網頁式作品集使用AI分圍編程，邊做邊學下理解Html基礎結構與包含css、js等語言的概念。</p>
+              <p>喜歡邏輯思辨，對專業知識學習有熱誠。專題團隊中擅長扮演分析者，對工業設計、產品設計類的新資訊具有一定的掌握度，經常提供有用情報與概念的實務應用方法。</p>
+            <div class="skills">
+              <span class="skill">3D設計/渲染/動畫</span>
+              <span class="skill">草模製作</span>
+              <span class="skill">木工機具操作</span>
+              <span class="skill">3D列印</span>
+            </div>
+            <p> </p>
+
+            <h2>Software Skills</h2>
+            <p style="display: inline-block; font-size: 1rem; margin: 0;">平面設計</p>
+            <div class="skills" style="margin-top: 10px; margin-bottom: 20px;">
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAACXBIWXMAAAsSAAALEgHS3X78AAADDElEQVRYhc2ZMWgUQRSGvxxHiCJ4SIQUmkSMjUS8TgvR00KijSkEISAEtdbCzsLEQisLtVUkjYWKkC6CCEkRC7E40UIxSEwKY3dBQRH0yYSZ+NjMbm5nd+/uh83uzr7JfPdm5r3Z2S4RIaMqwKA67wO+Ax+ABvAZWAF+Z2rGgAYcQyJyU9LpnYiMici2kDbTGBvv10RkKSWgT49FpK8I0L05AUZ1V0S68wDtCujitGqIyP4soOaXzhQMqTWWBFqOmWNbgI/A7qwhIYUeAVuBB74qpZiy1y2GdLoPjPke+ECN8XBLsPwynh2KPokG/BFgpo2QTssWdj1JaI92dwgkdthN6AINOrHRvq26BvQ6ANf1PcDPAKovwKK6N/n+YIztKjBq8/9Ugp3WQ+Di2r2NU5cCY9+oJ+Y1YmwnlU0tRRtrmct1/e0AbxoPTXvKZ2Psq+q6lqKds2t/RaQ30JvTykPaW+MJdRZFpJ6ynRmXQkcCQccVnFHFXlcC/1+SSqbrT6Xq8P9y3V6LnM1kmfPY3zCT1x7HU7a1w4CeCICcs0CosafHnW/sZtFwKTBdapDRyLkIUG+ub0YOxMTNY/Z6wL4zYWPr2xw5++KWeUnSQb5ix55P000G9WbUEwKqu9UATybY5ZWWV8o2cG9PUWlKXVetV7VcwK9b7w/kAPrLgD4DLjRZYdUCOM16fuQeNTSMV6/kALpsJtPLFBV0t1djeqKIMPWtFPHQZvKFpah0+azthSwy9X+U7dZLs2ooj8WBnol4tW5D2KAqr8bU9ek6aj16J6exVITMZFxyoOb95FMHQr4HDqAy0wLwqr1MXp13hfottN/GvU7RujeJ5Pol4F4HgZ7UN9FFyVX7Tt1umYn9VTP4dpz7okYt1lPgnHlL2gyUNkaBeeAo8Df6IG49umD34lup5zYxbIBMAnWwO1s0Zm8Bp4E/sRZNbEuX7BZ2ETKbFYfz/tjQLyLzOcJeFpFyEV9FNHDovr77hNM0oDuyfBAz43sXcAQ4ZFdN0dX8EzvWXwBvzHItqCXgH1Qx60kf5WOVAAAAAElFTkSuQmCC" style="width: 20px; height: 20px; vertical-align: middle;">illustrator</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAACXBIWXMAAAsSAAALEgHS3X78AAADFElEQVRYhc2ZwWsTQRTGv4RQFCoN4kHBpqlYBBEaPHmMN0WkuaigCAGL4KX6H1gVPSdei1VPgh6MF/WYQBU8aamIiIcYPYqmIHjSJ6+8KY9xN5nZTJL9YNnd2czkt2/mvXkzmyEiDKgJAHsBHACQB7AfwByAtwDaALrqnFwMmuCYJKLzRLRBfqoR0WEiyvj+py/kHiK65wkXpQ4RVXyAXQEniKgeANBWRywcBLQgDQ5Tt/tZtx9kZciAWmtEtDOOpZfXLwJYGTQkeOorgEMAftvV4kArAJ6OGNKIYWcB/NGF2YgfFsYIyZoG8MgutC2aleA8PVK0aJ0E8FKDad1KCSTrBYAd5kZblKe/n2PDitZdAFdhgdYBLDlUbsmZ5+53cl2WF50fAuwuAL/0zOOiZp+4WySiRuD4usRtmzF6KtDbtyW0PQzUHusmlDNdTtAAdzfJwcOgqp5dC8O4pSkOmVmBPRGgsfsyTiHgLes3X6SsFfGsn47mAOweEFKrqBzMaFOs3bDKfaLMcbbmwUCQbDENWZRzxYIsWWcXLeR0UPUUd++6ADUBLKvqPH5nBL6pwBsSwjY9lyYzuYSQkC6Osgp3aU2uNUxX3U/J4ayopCSpGLAqL2AC/7xY14CWJTO64f0fRFT2CL464Jfk3hxx6hJRNWJyKMkzJw0C6lOP1SaiZSLKqzZqrpW56z8G7P5eYue6bk0Grg61ys70Y8iAszI2y8rzjYq9q25r3XSB60aCb9f3SmJKrt3OS2rj9a6LuLyyjkvALkpXG2sW5fqBbPm46pPJRwsSnNOoVQCXdOK8AeBICkF5w+2zDvgXxwgTp/cMCWtm4hnldaowgXPmwp5CF0bPEisemx/MQxv0O4ALKYDk3ZIruiBuS+cxgDMjw/pfPIt1dGkcaAbA8wBLlCSaMw6kFZfmkaxMn6QBEn3y0b/idXeGx7UtHpP74iC35Lg1fswnd/RUXTZAgn1syBLRYkDAV7LtHvRjgz5yCT/dGHGy7AzosjXuoknJD07LsvusVYkTnWcA3gBYA/BNxr6fAPwDhWaG2IuwdlYAAAAASUVORK5CYII=" style="width: 20px; height: 20px; vertical-align: middle;">Photoshop</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAqCAYAAAAqAaJlAAAACXBIWXMAAAsSAAALEgHS3X78AAACzklEQVRYhc2ZMWgUQRSGvwvh0O5EC5vogQpBFBVEBRFTWMTKYKGQxkMsBW21uhTpY6+iWKlN1MIrtbAwRYxooWhxEWu5iKBY+OTJTJgbd+9udmf39oclm92bN9/Ovnnz9k1NRIigBjANbAGawBHgE/AV6AEfgG/A71xdKWyGQx9yv4gsSZheici8iNSz9BvaYEJE5kSkFwiZpFsi0igK9oSIfIkA6WvRDEIUWDV0pwBIVzoIu4axDJtgW4EV4ECMWTiCjpv+EjUxBPRjiaCq18CVtJtpI1sHPgNThaKlS0Pfmn83aWRrwJMxgqreADv8i0mwl4HZcpgGatXn82F1JbpdAVDMm73qXvB99iFwoXSswdKJ/gtvZHcGgK4DL82xHtBxzTlG1fXN3zlBdzEgiLeddu2Adm5/IZrUNnZk9e/NrO+pBB3EcYPpCoNiJ5qFPVNAB65fb+S0peGUSfPPyfxsm1KwFrDsXNOQeC+n3YaFjRmuZhKWSv1amMtpd/ugRCaL7nugOpoayLvA4Zy2p2LDuq9e4+Mlc747ghsMTBGz6IXTxn/th6oG24tsr0+xYZvOede79zan7Z6FfZ/TkNWMc77kxFcFbeW03bWwT3MasnKB1kwEWEgJZ6H6bmGfRYI97c16dYW28eWWN/Ihq1oH+GMXhdVAqKbTcdO7p+Gqadxg2fyuZa4veA8yaoR4gJd8P6/I50ySdLnecKPBjeqw9aljXcYd2ZrJlMb5VZukfaYs0BdnpYLfXx0LSkqRo0q+u81dFZNWsPMRkuUYOusv30mwP4GjYwa9a1ygT2m5gfrJqfLY+vQ4rTg3rOR5zFT2ypKCXjST/T8Ny7pWTOJchg9fGwT6TyOW6OsFVr+16r2niA0Q3aF5FxF0ftT9hCyw9tibYVvJSh921paEQo68m3bq81rN0bxV9wPOGR939chEF01DNcn/kakn4C+DTia7uBekBAAAAABJRU5ErkJggg==" style="width: 20px; height: 20px; vertical-align: middle;">inDesign</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAArCAYAAADhXXHAAAAACXBIWXMAAAsSAAALEgHS3X78AAADB0lEQVRYhcWZPWgUQRTHf4nHIUHxCotUkiKFnR8EiQgmYJNC8SwUieBHtIqF1ja5Jn0sLCOJoHAXhIhFLC9K0ELEgIWFhXZ2GoQoIcnIhDdhs7czd7Mze/nDwN3szJvfDPPezpvtUUoRSQeAwxmm/gBbMYboDehbBoaBaeA3sAn8yiib8nxa2pdzj6hX1rP0K6VmVZhmxY7X2D6NDyml6oGQaWl7ldiwY5Eh07oSA1Y7YKNgUCM9Tq+LxxUNtHcvA+dyO4S/VoARW/SwwfYA77oMaqSBzwPbLVAW2AZw1WFwVcJRXlWAE46+C8C1TmDHgCWLkcfAS+BCAKjRV4m7DyzPbwAv9tRkhCebJpVSi5GdalHs2lRxRQNbHJ0pANSoqZSqWZ7VbbD9DoMXCwLtxP4xw5g8G0xb9o52pqEIezSpH6n/QzJOlqZMnYHVh4sJS+MQr7dpzmOcCXP4MbCnCwByKQvWpbNJ2EtdBL0DfPfsc5ME7P34TC3Sr+5TsqpVz747W7QkZ4AjBULOC2AzUfcwh51yyZKKhOoVsCgl7ThVOaz4qq8UEVCHo5oF0OhkDufaVUgOZrQmTjMgIDbQ27IVcm+50JVdFYjPjjZ6EjPA5cCxgmD1io46VrIq5VbAGHtUkrw+j6op0AGB1/WjBUSY9ZKkEGuexpdl/1UkDFXbHKZjaMNsgyfAIw+Dc+LZQQ7joackosFrz87NLoJqPSMB+8mzc62LoFrvScBumKXOUCWjLpqHd6CG8HWcKVwvIDtIypUpDGZlCj9lFlkalghQhJYdmcgb4Nvuv1TCWHHMcFKSu5hqtsluj7a7PhoHnltmqu8NPgDHI6zwR1nRKcvze8BssmK/bmRoc0zs+EYGiRJv9+mu64u8cFou52xHxG2Z+UrxbHukQc/YbhFd59ktuc1bKJ5xRwuyon+tLTq8+R6PHAXSuisX19G+KeiwthQZcikdnmLBmjIY4WtNPflmKhLWlLJSasQDXLfT7XW/XGPG/MKo76P65PdB4J/8Xt89iIQI+A/R5VpCM42vdQAAAABJRU5ErkJggg==" style="width: 20px; height: 20px; vertical-align: middle;">Procreate</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAArCAYAAAAOnxr+AAAACXBIWXMAAAsSAAALEgHS3X78AAADGklEQVRYhcVZPWxTMRD+GkVMrZqhiDAQRYxQ0TcgYAA1LAgmwsDShQ6wAjNTAbF3Y0IqAwNM2Vq2IvG/AKKwgCAJA78SrcqEkIyusiv3ar9n+16aT7KU5+c7f7l3vrPPI0oplIRRAFWm6h+AP2WorwhkGwBmACwCoH+7DuA3a+v63aIe20iejSwa0SpKqbZSqq/SQbKnta7guUMHjmjlqwKCHKSrFUo0xEfJ954BmEz+bPlYAnC+yJeLiB4A8G5ABG2sATgM4KNvQN5iau8QScI4gA8AjvgG+Cx6CsDDgVLz4yCA9yFEKYT0hkTSYC+Ab3YH//S7ADzecVrb8ZJz40RvA9g3RIIGxOHmlh4rVjWEcXHWEf/mhTonXAH/iUBh1xOoa8IkcZ8TrQuUKY81TZsT6h61iV4WKPJZsyyrXrSJShRdDcjVCwL9fZPrJwD8TFydlPqaAFatvpZ+fm31ZQBepYYAAGMV4Wajw0gS5nSzQaTfCOaZJKLHBAoW2DNZdxrAWQA19m5eME+9otNVCijNLjO5Wet3m73rCIieJKL1RGHXxIYo+W6XvSMXuZs410YK3ZMoyz87LSL63Ne1C3BrQ2JVOjV+T5DrsVVtkDksaaOjrT0eO2GFb6cC4bIMWTCPpEGSVYno15KIhsLlEkV4QUSfRwqtJU4mIfqJfHQlUshlzSZrmY6j0zrQZ9bYru6biphzhYj+iiTKLUKEPueMn9J/wvbf5QiiX+gobXb41wREM884G60CHXm4Aesoci9QqFcQfnxosv6YxdixifYBPA0QclmC53QXuEUJjwLkHhjXtA93FwIEa8w6rcDNRmbl/pqHuAtXNvvYBveOYINbNm7lFcnoXP8jJcWVDFrp+3UheAP8XP9XF6uGjeM2SRdR6IrauSESPaoX9xb4qnkUEi7tHLdNnNDlnG0oqo9KD2UxcFbxDIouG2jPuTthPxAD0j2WRxKBtyIUcA8NwG9pF3ZG6y6+4om8FakqpWaEBYu+vlmpDuJWxNUauhT0NoAcjaGxJJM0X5k3dybnm9s7Ewd5gSIeAP4DZHlzrC04KlsAAAAASUVORK5CYII=" style="width: 20px; height: 20px; vertical-align: middle;">Auto CAD 2D</p>
+            </div>
+            <p style="display: inline-block; font-size: 1rem; margin: 0;">影片剪輯</p>
+            <div class="skills" style="margin-top: 10px; margin-bottom: 20px;">
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAArCAYAAAAOnxr+AAAACXBIWXMAAAsSAAALEgHS3X78AAAC0UlEQVRYhdWZv4sTQRTHP1nCoeBpEAQbNUgqFTmstLpcFwvhLFTEJs1VwmHhH6CNtelVrrJQlLO6KxRzoChW6vkLtDhioZUmKCii9+QdszDu7W52djfZ9QMh2ezM7Jc3s++9eVMREXLAA7YD24CGGa4PrAG/ge+ZH6FCU34aIjIvIquSjOsiMi0iE2me59rBE5FZEeklFBdFR0R2j0poS0T6GQUG6SS1cJI1uhW4C7TyWMwRHAOexjXwhgygL8anEYtUngDzcQ3iLKoi349EVjS3gTP6jgdbRFm0CJHKKeBa2I0wi6ov/DYWWdGcA27GCa0AL4FDBQtV9gE9/yI49WdLIlJ5ZAy3gW3RLcCPwmSFcxJY1DtV6/aFFAOtmO+6maq8WQB2Auu+5686RJNaTASZEpHFnKNXyw6h0w4dk4Tbdo5CV+0QuuQQfSrW76vAlPndBS5Z9/R6OqelMOlnRC7YlusG+rVHZNWjnlmseVG3xlkz3ytmFvRzGRgAM9Z1Ek54VkaeB31rjHrEeLNmWbjQqBr/mQf3jDvxaYaMuWAsXTNru5bwuafTrKUwlxT8r2m174Z4BOcEfFg+moTngTYaOB7G9FPPsMP1ITr1PzOIbFtrUaeymUBEqgimQj+n6Who5+gr4xh4GS06Lu6o0Hf/gdAXXsD3lZX7/lvfKbnQD35ScgB4XbyeUJaB475Qjbtf0/i3MXAQeONPvaq9WEKRH4G3BPZMKvpLyaw64ycwdghdN5lNWVi2s6ywAsQtU7Eomkm7ABwmdELdAbCnQKGbqnth2dMv464G49P1D3NhJcioNE9Nvt+8deNkzqVIZqNF3GdjKvM0rYLGJoYlzlriOQxcGaHAV8CuOJEbONTw94rIY9ctxBD04KIyilMR/9hmKYO4nhFYdXlulgMxdWNHdM8NnB8S0W4AD8xeSs8EnMnr5M4nuP3VyvWfzKMCfwFksbojOQJnmAAAAABJRU5ErkJggg==" style="width: 20px; height: 20px; vertical-align: middle;">Premiere Pro</p>
+            </div>   
+            <p style="display: inline-block; font-size: 1rem; margin: 0;">3D建模/渲染/動畫</p>
+            <div class="skills" style="margin-top: 10px; margin-bottom: 20px;">
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAACXBIWXMAAAsSAAALEgHS3X78AAADPElEQVRYhc2ZPWxTMRDHf42qwlCJIFUw0QbogJAQ2fiUeGwdGJIBCbEQUBkRHctEGYANla5QyMZIN9gogm4digoTDKEsDAhlA5UPI4dzcS2/5D3HSfhL1ktsP/vv8935fG9IKUUgCsAhoAwcAy4Bu5yhVoCXwCtgFfgSOhmaaM4yqZSaV2HYUEpdVEqN5J03T+dxpdRKIEEfZpVSwzGJ6tUvRiRoo6mUOh6D6LhsV6+hBTHUjks7Y5oE3gcrf348B84Bv3xvphHtN0kD7SXO+MgWPJ3HB0RS4xTwRAvQbXCJjgCv+8fLi/PANbfB3fpF4MpAaf7DBLBh/tlE8+jlG2AJWAYS4GYPiL4Fjmz9s1zAekYXNONxHwbLkd1Y4vrRyRwvN9oQpYvj1Yd1l2jek6dskSxK3ZpVtxSRrD50WlZfCDCgovW7Is81q26mK+3cjr/jK6UOB6zSlmhD6iqOOsSSatNI9ETAKo30auJGPooXsNGMJFEd444OAyczdK4CDdnyklU/5zwNipZKxMBeRLQdRe8pZXFH805bTba9EtFdJWTopK25JD4tESt3iReF4Jo8TX05I5GlDgKbykI0bWBjUCVrEt8iZqRdl7ozTlMWNtdhvloo0a0BhIwhUPdYv11sVViWxdYyzHNBn/XB11DBZbHwpxIDvAN+AHWJA5Df2ghfSJ95qdNe43GGOc7mOePT0JTt1zC+c1XqkzbSzSJJg5Yx3e+SqLK2tGbpaz0SSY0x/dJUBKIGDZFiJcWwkLa8KBQkgxELE6KHiTNeWUpR9DMP9KXvt1llJ6ffjXRL4l9VBjfkQ9W+Lk8DDyJK1sYtsXgt0aMB7+8ANg3RncC3HhFFgpaJgPcWgOs4d6ZZ4G5Uet1jt4nC7Ovyvf+M5B07VHSvy1PAs4HQ2o5PwAHgp6l1ExDaFTwaIEGD0zZJUlI605IDGhSqduLBIC1JplM7H4B9fSZ7FXjoa/BJVGMT2C+q0C9U00i20CGROyQp7F5iw9zdu02N63IwQjjow+2sefysRI10k0ipcp2ZGcsxd9DnGyRXdSNnMKO/qAR9urGDkm4wKlnqPRLGmXTPZ+C7pA+/tkK1UAB/AKVgWkS8fs+aAAAAAElFTkSuQmCC" style="width: 20px; height: 20px; vertical-align: middle;">Rhinoceros</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAACXBIWXMAAAsSAAALEgHS3X78AAADN0lEQVRYhc1ZPWgUQRT+ch7pxENsPQ9MFQQ3jQgKSSPELikEsTr8aTWdWhkLrS/WRlIaRbhC0EY8xd5ILCwvZ6eFJwTExidP3ujLy8yyM7vJ+sFyuzszb799/7M3QUQogUMAZgCcAzAL4IwR9R3AMwCvAGwA+ATgV9LjmGjkMUlEl4hoRGlYJaKp2OfGTG4S0a1Ecj5sxhAuSvI0EY0rJKmxKlYqRZR9uLdHBDXYjdp5XPKC6QCA5wDmy0RbJGYk6HYhRLQB4K0nimsj2/BMnADwuCaSjPcA2vamj+hlABf2h1MQ7wBM6kFr+iMAvtZM0uERgCvuwmr0dQnBd8VtFqUilQVbdtpHNANwooRwXt8C0JfzDxWQXf97pnLVZgX5cIOIOiKvRURrFcic0gm/XYFAB65gmVJAt2RVe8JymqLYhQJmYFP2AAwjzbcmeZFd4ljkWkgGarq3LtIJLSV0WvpgV+gnanWa0xPnq58F3mxLtGPRN5UkMxZy2nRYBnAnUqs3yvpnt6DGhsZvYxuddV40l0DQPhgS8SSB05OX6Mlct0bPH+bI34UUon3RHkxkO3Q9vumiflndX9pLoqGAcibfCIwvyPhY3evEEG0WcGRISeQAGch1S37H5nrgWQsJMMhm0CEqzfm6J4s3ADqKRCbnmZrnxrrmvoPLAlsx5HZA9kMhrBkTzil/6xozuvtDGZuTY6Bkax/NIiw/ds7ug41S6/z9gB+GYP03JphWeEEj9BbyEnnNRcdD1qadsdGkU05Mepp3C19ELNIIRXmmTO8bj+2q2m7hbCJRCuTVvCOW5Fi3eZMliJKYMaQ9HYiDArIsrtp9/QqA68np41/6cU3KUHX9nJ5OJso8CGBbE2WB30oSrRoP/nROJuFzlbn/nxG96U7sdrkhJjtaC62dOA/gpSamwR9Zz9bPEU81SQRq/Uj25nXhI4CL9tmhpoQj91oNRD8DOOX7fJ7XPT3cZ82yqacA/PCOFqgk7RLf64vinnw0DvIoWvYaIqxqsAKOF+FQlKjuelYqIDuSkpqrxTJEdW+wGNl1cXNxO+WvG1vrU8EBeVh9CeRtC4MrHR9fJOVtJz8BwG+MT8xH6e5zegAAAABJRU5ErkJggg==" style="width: 20px; height: 20px; vertical-align: middle;">Blender</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAqCAYAAAAqAaJlAAAACXBIWXMAAAsSAAALEgHS3X78AAADfklEQVRYhcWZTUhVQRTHf09EFIRcVLQpjR4FbXy2iT5EF9GiEq2owDaC7VpotKlVtrBtLaJVkkGbjMpoUdAio49VlNKuIvzYVrwgMlp0YuJcHW/3vjsz9z37wwWdcc7875lz/nPusSAi5EA9sBXYB7QDR4E1MXOPgTfAE+A18D14O0M24CmKyISE4Z2I9ItIve++vkRLulm1cMqHtCvJphyezMK8iHRUi6w58nKNiNoYFZFCJS5ZCbYXeJ4nAz1xBzhhUilpWV0FW/tXmajBMeA2UEiaTPNsEfhQc2rpMB4+Hp9NItsE/PiPRCMcAe7bA0lhcG9VKaXD8GixZ+Oe7QaeBhr/BkzqTWV+/g1cA1pzEH4F7Fn6zZKGgmqeL6ZE5JCIDIjIpLXWyN3J2FgIihFHOwx2AhsD3n4KeKGn0muNmxrhFjALnMnh3ZtJnn0U+OYjlo3hlL+ZFpEDOS6XtfYN1hBoJE7WPN0ppMoaLlMBe/TbYbAjxzHFYcKiBMzExk1YPNT5i542T2NJV08VyRqYOC2tiLdlXND47lHVcMHuv1z16ELLvllVgUqF0EDK2rLG8bTjXi2Rzvp8LpjjHQfe61dCWY92tsKakv6NCYU51eO7wBZd56Ltu6K3d4VJkCvq0QgjmjTxRIs/LSLSmaDH3Y57d9d7eBQtcIZS5qJY7FNvx2HGzsa02AuVSsQQdLGcXEloyWO82mTRuHwLDFfbcF6yM5osScd+WecqeXPOY6+FiOyEJ0Fz12/W454GBlI0tVfn7bB4oOsPqqqMO+77JcrYQceM7MuhqX36jAfWCEu1QdFxQdnhEjC9hdmEtSOBdYHBmF0bfHI8CpM8NzJiMTr2Z442XXAVK8FMVX/eY3FSLNooq+b6FixpmCGmBtc9DbQ6SNQIcNijYEnCkDrzn47MWGBMTep1mhbHbZpcITHbmNY+ag4kK1ovlDKSz7XCijCY1etylbE02AVNm1W4+MrVfLz3ldaRmdBWTiiir4T2HDbWAZ/tgTSyDcDHwK/daqBD1WYF0mqDX8A2cx+vIsEInUlEyShkFpXwy5pSW4kO7UEkIqvqWtQ3vVRjkgsao4keXYJrP19lKaS9lIVzIlJXrTZ9vB/WVyXSoxkXSW6y9rNdN/TRT9Oi6tIOkPeeef9pF6EZ2ASsBzYAjTphvsd+qgx+XbrjQwD8Aai0xLWRgLW1AAAAAElFTkSuQmCC" style="width: 20px; height: 20px; vertical-align: middle;">Shapr3D</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAACXBIWXMAAAsSAAALEgHS3X78AAAC3UlEQVRYhdWZPYgTQRTHf4lynCBcEItYeFwjSFA80MKP5uzOLrZWh1wtV6pVwI/a1CKk9UA4sbCTCBE/qkCuUzCeFofVHlhZ+GTCLMyNs5v5yCXnHxZCMvveb2dn/2/epiIiJOgkcAm4AVwErlmhvgEvgY9AD/gB/IlKp0ADj3kRWReRTOL0SEQWQ/OGDJ4TkbuRcC69CwH2hVydIKAtNcPVcQzj1mgVeArcTlnIHvoOnAf2ioaWgR4DPgHnDhjS1Bngi+uHItA5fcLpaREacsJWHQMrwJsZQSp9BhbsL12gDx1+OG0NbDYbtAHcT4RSJv82MYa6mw/2fWNYgFqvOwk2owrAhhGvKSLDROuqu3y0mRCwJSK1Ag9sJVSx1zZo7Gx2RGTJo2Coi3gSCVs3QRuBJ3dFZCVin6Auaisw1z0TNORqOxGA9rEWCFvJA4SqU7Imxy2BVkS+xfxkX5kzn+mkIbNouoBaPn3PvKsqwOUAUDV+WSfJNdSOUQRoj+8b67vrTvOP2qFbONvO7BlaLnnSMz2rZgxf0B6Bm2GfNafgNgzvzEp81hd0NLidAGrajivpOJ/1BnVtSmI0BFaAm8bm9zqwpn9LlgJ9PyFYpS2grz93Jxh3T4HuTjDgQelFVfcrh127/wvoKwX6G9j2PGFpwgA1z3Hb+VPf9jzhK9AKSFCkpnaDCz6QwK/czxYCvFR0RbKrjO2NPuXUR7fsHf7zwADiKJtFoDVt/jE6aoPWIwOJte2zQVNakXW7FcmPZwmweXOXg6Y2d1k+m+J496TekPx0vQCYga4AH/K0dq1XVnX1EEA+NiFHKng61xNuWao2dVe8j6msdZgFbE9Ejrh4xvU504TdLHuh69OUNRLsxVd3XLc7FBT9/j6kE/DVQERO+TD4gppFIaaC2Rro7tc7dyhofhzXNXgQAKeWj7rFwX/duAw/RqpInADOAvNAXQfJ9KEKyM5oBxQr4C9yvAm32nQT4wAAAABJRU5ErkJggg==" style="width: 20px; height: 20px; vertical-align: middle;">Cero</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAqCAYAAAAqAaJlAAAACXBIWXMAAAsSAAALEgHS3X78AAADSUlEQVRYhcWZz2sTQRTHP62hKFQbQUEEaxEFqT8I3sSDORYRjf4DRtCr9uhJCuK9F08qLXiXqof2WEQFUTHQKIoiNV5FIoiKiE8mvA2TZXazM7tNvpBu0pmd952335l57+2IiJATJWA3sA/YBRzX4X4AL4A20AS+Af9ymTJkAz5jInJORJbFD6b/SREphdj1vWFcRG56EkzCFZ104WRHdPCNwIyO35dHFs1OAE+Aw3nFnYIV4DzwK61TP7L7gQ8bSNLGd+Ao0ErqkEZ2kERtHAA+uhqSyA6LaISyeroHo46OW4CXA6fXizUXNxfZ+7qohok9wO24/bgMZoDlIRO1cQh4G/22yY7qkThsr9owx/SR6HfJajhTINFXwFddKJ+AU4Fjm729AjSIebalWgmBWbnv9XrQMc4jNRoy/jPghE12EvjsOcgX4J0+nWMZPNfUa8hJuLUTxem563vuLyX8f11E5kWkIiJlEVmMtbdF5GFAfDFjBzJrnjefFpGGfjfXOSXoCkBchO942rsbkR31vNGgqp6byhi11R1jXPe02dmutgVoaEozgPWE9rIuqAiLwEXggV63A489bW4ys94R4Nk5h/fK6kFbz/UUb1c9bZbNSh4P8KztwZp+zjraF9TDszlsdFHK2C8JVSVkI4qWoq3sqk6qnpes0ezfQJIGS6pBLD0aYtVYiHehEO+q1nyxmmEHqGi/+YRtzVezm40MfuaesRsN6wkUgd9GBn9cUXkfVFKaTVu54ImbhLIbfN/yvHlC984Ihtyc7ruvgVWKJXyv81f1Mx2gW1E9oidZO9a21EfTNQ87k3ZsEHLkRqhbC6qtJNMOg4rGC/HJJaHlqshcy0G41seL0enWyDBW4tjxAUPRTtiefL3oQslFNq9326pdM+lZjW3zoueJxbPbkuZMoemNyTb2FrH8NbMw5aQuQVdFZhp4U5DBPNipSWcXriKHydMvD5loNU60g5QVfKMAzYXgUmgxeaMKyElIJJq1mDyoklJPqcgFl2bjWFGxNzP0DcGK1gVSiXaQMTu1Y9BWQY98LSV9D9Ks6zOiRnxfK0UwNQATOHnbzvvSbkyr5OZFndnATdJoHwpPtUj3XINxU24Ke3EH/AeITb9qs1OagQAAAABJRU5ErkJggg==" style="width: 20px; height: 20px; vertical-align: middle;">SketchUP</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAACXBIWXMAAAsSAAALEgHS3X78AAADBklEQVRYhcWZMWhUQRCGvzuDIJx4SgpTqKcGFBEMImKjXBkrU1nYGIl1sLQMSCqb01rkLFUExUJBxAgGSw9MI4JczkYs5ARRsBkZ2BfW5+67t7vvzh9e7l7uzcy/szOzs/tqIkIimsBR8zkHzBh1H4EN4CswAH4kmVGiEdesiKxKGIYisiwi0zE2Qx5W77dFZBBI0IV1M9jKie4XkfcVEMzjmYg0qiBaM9M1bsynEK2LyIMJkMxwPYboNhF5M0GSGW6EEK1N2JN5OD3rIhpadsaBf2I2X/DPAG9TV4CKsNNeJOqWTv3+PNHGFaBmXbuB75G6Hv51Z7n3auIU6srjCqVOgs65fIxOVRBnK56MbSXoXM8TnU8kqd5sFtTBboJuXRW3YvRmYmx2gGHB790E3Qv6R7N+B/AzQZHiINAf8UwPOBGhW5OxWY8UtnGvBEmM12OwC2go0dOJRFdy9zpVi47nugml6rgSPRwprHji8OZCFlcOxHq1qRnZS8jIdi67m9ZvrQpL1WpKjL4G1hzedH3P0DezEIrGVCRJPNP42GzyKChJ+v8Loca0POkoDwTKbQKtUGMWQm3e1ql/GWEon+mhCF0AXinRL4FCm4krDRHyQyX6IlCoqMS0rOVUzBS7QqRvkrEsNjAHAmXhaz60HVvz6Oh4GpXFALu1TGhYUsDVyinxfoGMb3DNknY7dptXpmn2GbwWOcCy7d8xm2ijhEDXY6zIm/YgXbLtEnK1/C701ggh15I4ypCNxYiBLri2y80CAZ83fQnkQt+jw7enGpjTGud2eQm44ygZWc/ZzpWimBWtZ3qEnmkHL3uePQm827pznJL8j6OcPFZHHUAodGvyAdgX6K2qsA6cNQvGFnxH43uAT2YbMEl8BmaB33mbdQ+Jb8ChhK1DDNSTR1wki4hmZGfMC4Nx4y5wDvjltVNwaGAn2NKYkmbo2M44rzJE7Tp7v0KSeg66vaz9EKI24eWARsaGvrC4FEKwqDyFYBo4BZwH9gIXLWFNxEemMX9qYj3upRjwB+JfaQ10CXoXAAAAAElFTkSuQmCC" style="width: 20px; height: 20px; vertical-align: middle;">Alias</p>
+              <p style="display: inline-flex; align-items: center; gap: 6px; min-width: 100px; margin: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 50px; padding: 1px 10px 1px 4px;"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAqCAYAAAAqAaJlAAAACXBIWXMAAAsSAAALEgHS3X78AAAD3klEQVRYhbVZv2tUQRD+7ghHAimuCBIs9NBUIWAEkQiKJ4ikMxY2aTwhvVdaXqH95Q+InoWCabxUwcoXMIWIcCGWIke0Dk+wSOXIhlkZh/15l/tgeby7nd1vZ2ZnZvdViAhjogZgHsAlft7g4X4D+AygBPAVwDGAP2NNZciO0GpEtE5Eh5SHbSJaIaLqKPPmCtSJaDOToA8bRDQ1CbJGE8/PiKRESUTNsyR7gYiOJkBUYptdK8gltsGuA/g07g5MxA8Ai7wxnQiRvQfgfeaEe+q9DuBKhvwvjirHzn89Kl/O8Lku9w+ZcI2IBoljGpebSfXZucRBh0wiJ5IMeYExmJBY0WNUlaIrAD4kmMqY+yKAd8Y4APoAWmx2H0ruZ553eBwflgA8i7nBemTFA9aQNG9Pacu8NwLuQOw29QTXmPO5wXQmUW3ijoO07t/g/zrKNXzY95HdCAiV5NeWbE1FuHT4tUE/YzMvaLLViEArQLDBESGkoZ7oX3BfOUYnILulyS4GOuuBJcmeo7/RZp8XILVs3ajgd+1GoShRk2RDeV9rtc5ENHoOkzfUJhqId734kHavSrI+lI5koc1dRPy57rGALmAafhqnyjwlOxvoJDdCS/wuTeaLELppwq5qyxfKDm1SmA4E5wE/uwBeciB/AKDHvx9wkE9BS9UOLrmBZ5wlmxRWApptCv+UcdZukm5GutXW8aVjH6ZimjXaeMIaaQpt3I5owoeG53eTpgtO4T7M6tpA4xGAV4qonHCYSdbiwEHUlJI7IaEY2T3WroQkm+qvFk1+WossC6KPI5Y6MWS/BzoUiZOnQrpPWxHtRaq2E+vYKaHLtqYKYbHC2yU3FPJrCaGrHCUp6EldE/oSgyYyUAsNJYVNSXY70FGnW0u2UKGmHShydCXWcfQNpdtVSXY10FEXMlYDhUNjfV5c12NSX2EeK2RmJdlaoCM5tGvJ2on6kcV2IvVDSKv/CnApsBUQ0MW3rZ6kfNth7pTNFyu+V1xk5yNCMt3aFOzyUVmwDCOFe8z8R/KUq4VD2pWE5cHPpy1JuuT3piIaOzD+V5npSWYiwiRCDnkigNZcWxQ+lnjhGVtiV4/nmiBUhUmUDr+NtVbi2GQjQIysaU8zBu0nXFuueU4LPiy4xvFdzJmbmbcAHmbm/nEv5gxuAfjo/CegjYrnYDhJ3AxZKOUDyDqA15nayYU5Ll0D8C0kF6tnDd4AOM+XvZPACwDnYkRPkbGTK7xRUq4sU3DIlyvJHHLI2lbl8LY7IkmzD5y7PdbG/WhnPtgtALgL4DKA++rQtw/gC3+XMDv858gf7gD8BRlWaCyBF0/PAAAAAElFTkSuQmCC" style="width: 20px; height: 20px; vertical-align: middle;">Keyshot</p>
+            </div>   
+
+          <p> </p>
+            <h2>Contact</h2>
+            <p></p>
+            <div class="content-wrapper">
+              <div class="contact-details" style="flex: 1;">
+                <div>
+                  <img src="/YenCheng-Portfolio/assets/mail-Cko07G5o.png" alt="email_icon" class="contact-icons" />
+                  <span>yengchengchou@gmail.com</span>
+                </div>
+                <div>
+                  <img src="/YenCheng-Portfolio/assets/phone-D7gcLxy9.png" alt="phone_icon" class="contact-icons" />
+                  <span>+886 966 422 126</span>
+                </div>
+                <div>
+                  <img src="/YenCheng-Portfolio/assets/locate-DtESQomu.png" alt="locate_icon" class="contact-icons" />
+                  <span>Chia Yi City, TW</span>
+                </div>
+              </div>
+              <div class="social-icons" style="flex: 2; flex-direction: row; height: 100px; display: flex;">
+                <a href="https://www.linkedin.com/in/yen-cheng-chou-368649219" target="_blank" rel="noopener" style="background-image: url('/YenCheng-Portfolio/assets/LinkedIn-UdWT9_0S.png'); background-size: contain; flex: 1; background-position: center; background-repeat: no-repeat;"><span></span></a>
+                <a href="https://www.facebook.com/profile.php?id=100091496049902&locale=zh_TW" target="_blank" rel="noopener" style="background-image: url('/YenCheng-Portfolio/assets/facebook-BPLwXXKi.png'); background-size: contain; flex: 1; background-position: center; background-repeat: no-repeat;"><span></span></a>
+                <a href="https://www.behance.net/yengchengchou" target="_blank" rel="noopener" style="background-image: url('/YenCheng-Portfolio/assets/behance-bxnKqH0w.png'); background-size: contain; flex: 1; background-position: center; background-repeat: no-repeat;"><span></span></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact-section" class="section active">
+    <div class="contact-bg"></div>
+    <div class="contact" style="min-height: 100vh;">
+      <div class="container">
+        <div class="contact-container">
+          <div class="contact-info">
+            <h2>Contact</h2>
+            <p></p>
+            <div class="contact-details">
+              <div>
+                <img src="/YenCheng-Portfolio/assets/mail-Cko07G5o.png" alt="email_icon" class="contact-icons" />
+                <span>yengchengchou@gmail.com</span>
+              </div>
+              <div>
+                <img src="/YenCheng-Portfolio/assets/phone-D7gcLxy9.png" alt="phone_icon" class="contact-icons" />
+                <span>+886 966 422 126</span>
+              </div>
+              <div>
+                <img src="/YenCheng-Portfolio/assets/locate-DtESQomu.png" alt="locate_icon" class="contact-icons" />
+                <span>Chia Yi City, TW</span>
+              </div>
+            </div>
+            <div class="social-icons">
+              <a href="https://www.linkedin.com/in/yen-cheng-chou-368649219" target="_blank" rel="noopener" style="background-image: url('/YenCheng-Portfolio/assets/LinkedIn-UdWT9_0S.png'); background-size: cover;"><span></span></a>
+              <a href="https://www.facebook.com/profile.php?id=100091496049902&locale=zh_TW" target="_blank" rel="noopener" style="background-image: url('/YenCheng-Portfolio/assets/facebook-BPLwXXKi.png'); background-size: cover;"><span></span></a>
+              <a href="https://www.behance.net/yengchengchou" target="_blank" rel="noopener" style="background-image: url('/YenCheng-Portfolio/assets/behance-bxnKqH0w.png'); background-size: cover;"><span></span></a>
+            </div>
+          </div>
+          <!-- Contact Section
+          <div class="contact-form">
+            <form action="#">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Yen-Cheng Chou Industrial Design Portfolio.</p>
+    </div>
+  </footer>
+
+  <script>
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', function () {
+        // 手機點擊時，先移除其他卡片 active，再加上自己
+        document.querySelectorAll('.project-card.active').forEach(c => {
+          if (c !== card) c.classList.remove('active');
+        });
+        card.classList.toggle('active');
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('.section');
+      const homeLink = document.getElementById('home-link');
+
+      // 點首頁連結
+      homeLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        showSection('home-section');
+      });
+
+      // 點導覽連結
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const sectionId = this.getAttribute('data-section');
+          showSection(sectionId);
+        });
+      });
+
+      // 點專案細節按鈕
+      const projectButtons = document.querySelectorAll('.view-project');
+      projectButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const projectId = this.getAttribute('data-project');
+          showSection(`${projectId}-detail`);
+        });
+      });
+
+      function showSection(sectionId) {
+        scrollToTop(300);
+
+        sections.forEach(section => {
+          // 移除動畫類別（會觸發淡出）
+          section.classList.remove('active');
+
+          // 動畫結束後再隱藏
+          setTimeout(() => {
+            if (section.id !== sectionId) {
+              section.style.display = 'none';
+            }
+          }, 400); // 需與 CSS transition 時間相符
+        });
+
+        const target = document.getElementById(sectionId);
+        if (target) {
+          // 顯示目標區塊
+          target.style.display = 'block';
+
+          // 強制重排以啟動動畫（確保 transition 能運作）
+          void target.offsetWidth;
+
+          // 加上動畫類別觸發淡入
+          target.classList.add('active');
+        }
+      }
+
+      function scrollToTop(duration = 0) {
+        const start = window.scrollY;
+        const startTime = performance.now();
+
+        function animateScroll(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          window.scrollTo(0, start * (1 - ease));
+          if (progress < 1) {
+            requestAnimationFrame(animateScroll);
+          }
+        }
+
+        requestAnimationFrame(animateScroll);
+      }
+
+      // 背景視差滾動
+      /*window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const bgSections = document.querySelectorAll('.hero, .projects, .about, .contact, .project-detail');
+        bgSections.forEach(section => {
+          const offset = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrolled >= offset - window.innerHeight && scrolled <= offset + height) {
+            const yPos = (scrolled - offset) * 0.4;
+            section.style.backgroundPosition = `center ${-yPos}px`;
+          }
+        });
+      });*/
+
+      // 初始載入時顯示 home-section
+      showSection('home-section');
+    });
+
+      function fixToViewport() {
+        const bgElements = document.querySelectorAll('.hero-bg, .project-detail-bg, .about-bg, .contact-bg , .projects-bg');
+        const scrollY = window.scrollY;
+
+        bgElements.forEach(bg => {
+          bg.style.position = 'absolute';
+          bg.style.top = scrollY + 'px';
+          bg.style.left = '0';
+          bg.style.width = '100%';
+          bg.style.height = '100vh';
+          bg.style.pointerEvents = 'none';
+          bg.style.zIndex = '-1';
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        fixToViewport();
+        window.addEventListener('scroll', fixToViewport);
+        window.addEventListener('resize', fixToViewport);
+      });
+  </script>
+
+</body>
+</html>
