@@ -1,8 +1,8 @@
-import * as THREE from '../../node_modules/three';
-import { GLTFLoader } from '../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from '../../node_modules/three/examples/jsm/controls/OrbitControls.js';
-import { RGBELoader } from '../../node_modules/three/examples/jsm/loaders/RGBELoader.js';
-import '../style/P4style.css';
+import * as THREE from '../../../node_modules/three';
+import { GLTFLoader } from '../../../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from '../../../node_modules/three/examples/jsm/controls/OrbitControls.js';
+import { RGBELoader } from '../../../node_modules/three/examples/jsm/loaders/RGBELoader.js';
+import '../../style/P4style.css';
 
 export function initCasualToolsViewer(container) {
   const scene = new THREE.Scene();
